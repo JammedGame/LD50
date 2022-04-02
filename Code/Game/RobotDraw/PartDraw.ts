@@ -24,16 +24,6 @@ class PartDraw extends TBX.Sprite
     {
         return new PartDraw(this);
     }
-    public OnAttach(Args: any)
-    {
-        this._Scene = Args.Scene;
-        this._Scene.Attach(this);
-    }
-    public OnRemove(Args: any)
-    {
-        this._Scene = null;
-        this._Scene.Remove(this);
-    }
     public ApplyData(Data: Part): void
     {
         this.Data = Data;
