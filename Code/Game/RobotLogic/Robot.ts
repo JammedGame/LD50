@@ -15,14 +15,19 @@ class Robot {
         if (Name) {
             this.Name = Name;
             this.Parts[PartSlot.Head] = Head;
+            this.Parts[PartSlot.Head].Slot = PartSlot.Head;
             this.Parts[PartSlot.Torso] = Torso;
+            this.Parts[PartSlot.Torso].Slot = PartSlot.Torso;
             this.Parts[PartSlot.LeftArm] = LeftArm;
+            this.Parts[PartSlot.LeftArm].Slot = PartSlot.LeftArm;
             this.Parts[PartSlot.RightArm] = RightArm;
+            this.Parts[PartSlot.RightArm].Slot = PartSlot.RightArm;
             this.Parts[PartSlot.LeftLeg] = LeftLeg;
+            this.Parts[PartSlot.LeftLeg].Slot = PartSlot.LeftLeg;
             this.Parts[PartSlot.RightLeg] = RightLeg;
-            return this;
+            this.Parts[PartSlot.RightLeg].Slot = PartSlot.RightLeg;
         }
-        if (Old) {
+        else if (Old) {
             this.Name = Old.Name;
             Old.PartsArray.forEach((P: Part) => {
                 this.Parts[P.Slot] = P.Copy();

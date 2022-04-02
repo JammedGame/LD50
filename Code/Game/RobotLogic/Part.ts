@@ -24,6 +24,7 @@ function PartSlotValues(): string[] {
 
 class Part
 {
+    public Id: string;
     public Name: string;
     public Status: number;
     public Slot: PartSlot;
@@ -31,12 +32,14 @@ class Part
     {
         if(Old)
         {
+            this.Id = Old.Id;
             this.Name = Old.Name;
             this.Status = Old.Status;
             this.Slot = Old.Slot;
         }
         else
         {
+            this.Id = UNNAMED;
             this.Name = UNNAMED;
             this.Status = 100;
             this.Slot = Slot || PartSlot.Head;

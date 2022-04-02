@@ -4,11 +4,11 @@ export { PartSet }
 
 class PartSet {
 
-    public head: Part[];
-    public torso: Part[];
-    public leftArm: Part[];
-    public rightArm: Part[];
-    public leftLeg: Part[];
-    public rightLeg: Part[];
+    public Head: Part[];
+    public Torso: Part[];
+    public LeftArm: Part[];
+    public RightArm: Part[];
+    public LeftLeg: Part[];
+    public RightLeg: Part[];
 
 }

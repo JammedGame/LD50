@@ -69,19 +69,22 @@ class PartDraw extends TBX.Tile
     }
     private SetArt(Slot: PartSlot): void
     {
+        console.log('setArt', this.RData)
+        console.log('setArtId', this.RData.Id)
+        
         switch(Slot) {
-            case PartSlot.Head: this.CreateTileset("Head", "head02"); break;
-            case PartSlot.Torso: this.CreateTileset("Torso", "torso01"); break;
-            case PartSlot.LeftArm: this.CreateTileset("Arm", "arm01"); break;
-            case PartSlot.RightArm: this.CreateTileset("Arm", "arm02"); break;
-            case PartSlot.LeftLeg: this.CreateTileset("Leg", "leg02"); break;
-            case PartSlot.RightLeg: this.CreateTileset("Leg", "leg01"); break;
-            default: this.CreateTileset(Slot, "torso02");
+            case PartSlot.Head: this.CreateTileset("Head", this.RData.Id); break;
+            case PartSlot.Torso: this.CreateTileset("Torso", this.RData.Id); break;
+            case PartSlot.LeftArm: this.CreateTileset("Arm", this.RData.Id); break;
+            case PartSlot.RightArm: this.CreateTileset("Arm", this.RData.Id); break;
+            case PartSlot.LeftLeg: this.CreateTileset("Leg", this.RData.Id); break;
+            case PartSlot.RightLeg: this.CreateTileset("Leg", this.RData.Id); break;
+            default: this.CreateTileset(Slot, this.RData.Id);
         }
     }
-    private CreateTileset(SlotUrl: string, ArtName: string): void
+    private CreateTileset(SlotUrl: string, Id: string): void
     {
-        let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + ArtName + ".png";
+        let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + Id + ".png";
         this.Collection = new TBX.ImageCollection(null, [CompleteUrl]);
         this.Index = 0;
     }
