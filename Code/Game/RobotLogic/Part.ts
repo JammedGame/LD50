@@ -27,7 +27,7 @@ class Part
     public Name: string;
     public Status: number;
     public Slot: PartSlot;
-    public constructor(Old?: Part)
+    public constructor(Old?: Part, Slot?: PartSlot)
     {
         if(Old)
         {
@@ -39,7 +39,7 @@ class Part
         {
             this.Name = UNNAMED;
             this.Status = 100;
-            this.Slot = PartSlot.Head;
+            this.Slot = Slot || PartSlot.Head;
         }
     }
     public Copy(): Part

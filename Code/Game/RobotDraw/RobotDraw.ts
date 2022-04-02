@@ -24,7 +24,9 @@ class RobotDraw extends TBX.Tile
         });
         if(Old)
         {
-            this.Data = Old.Data.Copy();
+            if (Old.Data) {
+                this.ApplyData(Old.Data.Copy());
+            }
         }
         else
         {

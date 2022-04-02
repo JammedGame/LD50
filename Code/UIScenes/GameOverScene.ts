@@ -56,7 +56,6 @@ class GameOverScene extends UIScene
     {
         //Override
         super.OnSwitch();
-        this._ScoreLabel.Text = "Your score is " + GameScene.Current.Score + " points!";
         this._ScoreLabel.Update();
     }
 }

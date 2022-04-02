@@ -4,15 +4,12 @@ import * as TBX from "toybox-engine";
 
 import { Level } from "./Elements/Level";
 import { Player } from "./Elements/Player";
+import { RobotDraw } from "./RobotDraw/RobotDraw";
 
 class GameScene extends TBX.Scene2D
 {
     public static Current:GameScene;
-    private _Level:Level;
-    private _Player:Player;
-    private _Score:number;
-    private _ScoreLabel:TBX.UI.Label;
-    public get Score():number { return this._Score; }
+    private _Robot: RobotDraw;
     public constructor(Old?:GameScene)
     {
         super(Old);
@@ -30,42 +27,12 @@ class GameScene extends TBX.Scene2D
     {
         this.Name = "Game";
         this.CreateBackground("Paper");
-        this.Events.Click.push(this.Click.bind(this));
-        this.Events.KeyDown.push(this.KeyDown.bind(this));
-        this.Events.KeyUp.push(this.KeyUp.bind(this));
-        this.Events.Update.push(this.Update.bind(this));
-        this._Level = new Level(null, this);
-        this._Player = new Player(null, this);
-        this._Score = 0;
-        this._ScoreLabel = this.CreateLabel("0");
+        this._Robot = new RobotDraw();
+        this.Attach(this._Robot);
     }
-    public Reset() : void
+    public Reset(): void
     {
-        this._ScoreLabel.Text = "0";
-        this._Player.Reset();
-        this._Level.Reset();
-    }
-    private Update() : void
-    {
-        this._Player.Update();
-        this._Score = Math.floor((-this.Trans.Translation.X) / 400);
-        this._ScoreLabel.Text = this._Score.toString();
-        this._ScoreLabel.Update();
-    }
-    private Click(G:TBX.Game, Args:any) : void
-    {
-        this._Player.Jump();
-    }
-    private KeyDown(G:TBX.Game, Args:any) : void
-    {
-        if(Args.KeyCode == 32)
-        {
-            this._Player.Jump();
-        }
-    }
-    private KeyUp(G:TBX.Game, Args:any) : void
-    {
-        //TOFILL
+        
     }
     protected CreateBackground(Name:string) : void
     {
