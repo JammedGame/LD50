@@ -22,7 +22,7 @@ class PartHoverDetails extends TBX.UI.Panel
     }
     public SetPosition(Offset: TBX.Vertex): void
     {
-        this.Position = Offset.Copy().Add(new TBX.Vertex(-180,130,0));
+        this.Position = Offset.Copy().Add(new TBX.Vertex(-90,130,0));
     }
     public Init(): void
     {

@@ -70,13 +70,13 @@ class PartDraw extends TBX.Tile
     private SetArt(Slot: PartSlot): void
     {
         switch(Slot) {
-            case PartSlot.Head: this.CreateTileset("Head", "head01"); break;
+            case PartSlot.Head: this.CreateTileset("Head", "head02"); break;
             case PartSlot.Torso: this.CreateTileset("Torso", "torso01"); break;
             case PartSlot.LeftArm: this.CreateTileset("Arm", "arm01"); break;
-            case PartSlot.RightArm: this.CreateTileset("Arm", "arm01"); break;
-            case PartSlot.LeftLeg: this.CreateTileset("Leg", "leg01"); break;
+            case PartSlot.RightArm: this.CreateTileset("Arm", "arm02"); break;
+            case PartSlot.LeftLeg: this.CreateTileset("Leg", "leg02"); break;
             case PartSlot.RightLeg: this.CreateTileset("Leg", "leg01"); break;
-            default: this.CreateTileset(Slot, "torso01");
+            default: this.CreateTileset(Slot, "torso02");
         }
     }
     private CreateTileset(SlotUrl: string, ArtName: string): void
