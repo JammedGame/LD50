@@ -3,6 +3,7 @@ export { GameScene };
 import * as TBX from "toybox-engine";
 
 import Settings from "../Settings";
+import { RobotGen } from "./Data/RobotGen";
 import { PartDraw } from "./RobotDraw/PartDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
 
