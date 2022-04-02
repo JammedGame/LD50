@@ -1,0 +1,30 @@
+{
+  "name": "ld50",
+  "version": "0.1.0",
+  "description": "LD50",
+  "main": "build/public/tc.js",
+  "scripts": {
+    "start": "concurrently -k \"npm run build\" \"npm run serve\"",
+    "serve": "webpack-dev-server --hot",
+    "build": "tsc && webpack --watch",
+    "prod": "tsc && webpack --mode=production"
+  },
+  "keywords": [
+    "toybox",
+    "engine",
+    "lD50"
+  ],
+  "author": "JammedGame",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^5.0.2",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.1",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "toybox-engine": "^0.2.2"
+  }
+}
