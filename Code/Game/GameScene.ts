@@ -1,8 +1,10 @@
 export { GameScene };
 
 import * as TBX from "toybox-engine";
+import { RobotGen } from "./Data/RobotGen";
 
 import { RobotDraw } from "./RobotDraw/RobotDraw";
+import { Robot } from "./RobotLogic/Robot";
 
 class GameScene extends TBX.Scene2D
 {
@@ -29,6 +31,7 @@ class GameScene extends TBX.Scene2D
         this._Robot.ApplyData(this._Robot.GenerateRobot());
         this._Robot.SetPosition(new TBX.Vertex(960, 540));
         this.Attach(this._Robot);
+
     }
     public Reset(): void
     {
