@@ -5,7 +5,7 @@ import { SpriteSet } from "toybox-engine";
 
 import { Part, PartSlot } from "../RobotLogic/Part";
 
-class PartDraw extends TBX.Sprite
+class PartDraw extends TBX.Tile
 {
     public RData: Part;
     public Hovered: boolean;
@@ -81,20 +81,20 @@ class PartDraw extends TBX.Sprite
     private SetArt(Slot: PartSlot): void
     {
         switch(Slot) {
-            case PartSlot.Head: this.CreateSpriteSet("Head", "head01"); break;
-            case PartSlot.Torso: this.CreateSpriteSet("Torso", "torso01"); break;
-            case PartSlot.LeftArm: this.CreateSpriteSet("Arm", "arm01"); break;
-            case PartSlot.RightArm: this.CreateSpriteSet("Arm", "arm01"); break;
-            case PartSlot.LeftLeg: this.CreateSpriteSet("Leg", "leg01"); break;
-            case PartSlot.RightLeg: this.CreateSpriteSet("Leg", "leg01"); break;
-            default: this.CreateSpriteSet(Slot, "torso01");
+            case PartSlot.Head: this.CreateTileset("Head", "head01"); break;
+            case PartSlot.Torso: this.CreateTileset("Torso", "torso01"); break;
+            case PartSlot.LeftArm: this.CreateTileset("Arm", "arm01"); break;
+            case PartSlot.RightArm: this.CreateTileset("Arm", "arm01"); break;
+            case PartSlot.LeftLeg: this.CreateTileset("Leg", "leg01"); break;
+            case PartSlot.RightLeg: this.CreateTileset("Leg", "leg01"); break;
+            default: this.CreateTileset(Slot, "torso01");
         }
     }
-    private CreateSpriteSet(SlotUrl: string, ArtName: string): void
+    private CreateTileset(SlotUrl: string, ArtName: string): void
     {
         let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + ArtName + ".png";
-        this.SpriteSets = [new SpriteSet(null, [CompleteUrl], "Default")];
-        //this.CurrentSpriteSet = 0;
+        this.Collection = new TBX.ImageCollection(null, [CompleteUrl]);
+        this.Index = 0;
     }
     public Update() : void
     {
