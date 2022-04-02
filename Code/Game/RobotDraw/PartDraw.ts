@@ -1,39 +1,42 @@
 export { PartDraw }
 
 import * as TBX from "toybox-engine";
-import { SpriteSet } from "toybox-engine";
 
 import { Part, PartSlot } from "../RobotLogic/Part";
+import { PartHoverDetails } from "./PartHoverDetails";
 
-class PartDraw extends TBX.Sprite
+class PartDraw extends TBX.Tile
 {
-    public Data: Part;
+    public RData: Part;
+    public Hovered: boolean;
     public ParentPosition: TBX.Vertex;
+    private _Details: PartHoverDetails;
     public constructor(Old?: PartDraw)
     {
         super(Old);
-        if(Old)
-        {
-            
-        }
-        else
-        {
-            
-        }
+        this.Data["Pickable"] = true;
+        this._Details = new PartHoverDetails();
     }
     public Copy(): PartDraw
     {
         return new PartDraw(this);
     }
-    public ApplyData(Data: Part): void
+    public ApplyData(RData: Part): void
     {
-        this.Data = Data;
-        this.SetArt(Data.Slot);
-        this.SetDimmensions(Data.Slot);
+        this.RData = RData;
+        this._Details.ApplyData(RData);
+        this.SetArt(RData.Slot);
+        this.SetDimmensions(RData.Slot);
+    }
+    public SetHovered(Value: boolean): void
+    {
+        this.Hovered = Value;
+        this._Details.SetVisible(Value);
+        this.SetColor();
     }
     public SetPositions(): void
     {
-        switch(this.Data.Slot) {
+        switch(this.RData.Slot) {
             case PartSlot.Head: this.SetPartPosition(new TBX.Vertex(0,-260,0)); break;
             case PartSlot.Torso: this.SetPartPosition(new TBX.Vertex(0,0,0.1)); break;
             case PartSlot.LeftArm: this.SetPartPosition(new TBX.Vertex(-185,5,0)); break;
@@ -46,6 +49,7 @@ class PartDraw extends TBX.Sprite
     private SetPartPosition(Offset: TBX.Vertex): void
     {
         this.Position = Offset.Add(this.ParentPosition);
+        this._Details.SetPosition(this.Position);
     }
     private SetDimmensions(Slot: PartSlot): void
     {
@@ -65,29 +69,47 @@ class PartDraw extends TBX.Sprite
     }
     private SetArt(Slot: PartSlot): void
     {
-        console.log('setArt', this.Data)
-        console.log('setArt', this.Data.Id)
+        console.log('setArt', this.RData)
+        console.log('setArtId', this.RData.Id)
         
         switch(Slot) {
-            case PartSlot.Head: this.CreateSpriteSet("Head", this.Data.Id); break;
-            case PartSlot.Torso: this.CreateSpriteSet("Torso", this.Data.Id); break;
-            case PartSlot.LeftArm: this.CreateSpriteSet("Arm", this.Data.Id); break;
-            case PartSlot.RightArm: this.CreateSpriteSet("Arm", this.Data.Id); break;
-            case PartSlot.LeftLeg: this.CreateSpriteSet("Leg", this.Data.Id); break;
-            case PartSlot.RightLeg: this.CreateSpriteSet("Leg", this.Data.Id); break;
-            default: this.CreateSpriteSet(Slot, this.Data.Id);
+            case PartSlot.Head: this.CreateTileset("Head", this.RData.Id); break;
+            case PartSlot.Torso: this.CreateTileset("Torso", this.RData.Id); break;
+            case PartSlot.LeftArm: this.CreateTileset("Arm", this.RData.Id); break;
+            case PartSlot.RightArm: this.CreateTileset("Arm", this.RData.Id); break;
+            case PartSlot.LeftLeg: this.CreateTileset("Leg", this.RData.Id); break;
+            case PartSlot.RightLeg: this.CreateTileset("Leg", this.RData.Id); break;
+            default: this.CreateTileset(Slot, this.RData.Id);
         }
     }
-    private CreateSpriteSet(SlotUrl: string, ArtId: string): void
+    private CreateTileset(SlotUrl: string, Id: string): void
     {
-        console.log('artId', ArtId)
-
-        let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + ArtId + ".png";
-        this.SpriteSets = [new SpriteSet(null, [CompleteUrl], "Default")];
-        //this.CurrentSpriteSet = 0;
+        let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + Id + ".png";
+        this.Collection = new TBX.ImageCollection(null, [CompleteUrl]);
+        this.Index = 0;
+    }
+    public OnAttach(Args: any): void
+    {
+        super.OnAttach(Args);
+        Args.Scene.Attach(this._Details);
+    }
+    public OnRemove(Args: any): void
+    {
+        super.OnRemove(Args);
+        Args.Scene.Remove(this._Details);
+    }
+    public SetColor(): void
+    {
+        if (this.Hovered)
+        {
+            this.Paint = TBX.Color.FromString("#63D1F4");
+        }
+        else
+        {
+            this.Paint = TBX.Color.White;
+        }
     }
     public Update() : void
     {
-        
     }
 }

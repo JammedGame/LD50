@@ -2,14 +2,17 @@ export { GameScene };
 
 import * as TBX from "toybox-engine";
 import { RobotGen } from "./Data/RobotGen";
+import { PartDraw } from "./RobotDraw/PartDraw";
 
 import { RobotDraw } from "./RobotDraw/RobotDraw";
+import { Part } from "./RobotLogic/Part";
 import { Robot } from "./RobotLogic/Robot";
 
 class GameScene extends TBX.Scene2D
 {
     public static Current:GameScene;
     private _Robot: RobotDraw;
+    private _HoveredPart?: PartDraw;
     public constructor(Old?:GameScene)
     {
         super(Old);
@@ -30,12 +33,38 @@ class GameScene extends TBX.Scene2D
         this._Robot = new RobotDraw();
         this._Robot.ApplyData(RobotGen.randomRobot());
         this._Robot.SetPosition(new TBX.Vertex(960, 540));
+        this.Events.MouseMove.push(this.MouseMove.bind(this));
         this.Attach(this._Robot);
 
     }
     public Reset(): void
     {
         
+    }
+    public MouseMove(Game: TBX.Game, Args: any): void
+    {
+        const SceneObject = TBX.Runner.Current.PickSceneObject(Args.UnscaledLocation);
+        if(SceneObject && SceneObject instanceof PartDraw)
+        {
+            const PickedPart = SceneObject as unknown as PartDraw;
+            if (PickedPart != this._HoveredPart)
+            {
+                if (this._HoveredPart)
+                {
+                    this._HoveredPart.SetHovered(false);
+                }
+                this._HoveredPart = PickedPart;
+                this._HoveredPart.SetHovered(true);
+            }
+        }
+        else
+        {
+            if (this._HoveredPart)
+            {
+                this._HoveredPart.SetHovered(false);
+                this._HoveredPart = undefined;
+            }
+        }
     }
     protected CreateBackground(Name:string) : void
     {

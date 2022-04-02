@@ -8,7 +8,7 @@ import { Part, PartSlot, PartSlotValues } from "../RobotLogic/Part";
 
 class RobotDraw extends TBX.Tile
 {
-    public Data: Robot;
+    public RData: Robot;
     public Parts: { [key: string]: PartDraw }
     private _Scene?: TBX.Scene2D;
     public get PartsArray(): PartDraw[]
@@ -25,13 +25,13 @@ class RobotDraw extends TBX.Tile
         });
         if(Old)
         {
-            if (Old.Data) {
-                this.ApplyData(Old.Data.Copy());
+            if (Old.RData) {
+                this.ApplyData(Old.RData.Copy());
             }
         }
         else
         {
-            this.Data = new Robot();
+            this.RData = new Robot();
         }
     }
     public Copy(): RobotDraw
@@ -77,11 +77,10 @@ class RobotDraw extends TBX.Tile
         });
         this._Scene = null;
     }
-    public ApplyData(Data: Robot): void
+    public ApplyData(RData: Robot): void
     {
-        this.Data = Data;
-        console.log('random robot: ', this.Data)
-        this.Data.PartsArray.forEach((P: Part) => {
+        this.RData = RData;
+        this.RData.PartsArray.forEach((P: Part) => {
             this.Parts[P.Slot].ApplyData(P);
         });
     }
