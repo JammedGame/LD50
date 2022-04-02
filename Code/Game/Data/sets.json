@@ -1,5 +1,5 @@
 {
-    "head": [
+    "Head": [
         {
             "Id": "head00",
             "Name": "head00",
@@ -18,13 +18,13 @@
             "Id": "Torso00",
             "Name": "Torso00",
             "Status": "100",
-            "Slot": "Torso"
+            "Slot": "TORSO"
         },
         {
             "Id": "Torso01",
             "Name": "Torso01",
             "Status": "100",
-            "Slot": "Torso"
+            "Slot": "TORSO"
         }
     ],
     "LeftArm": [
@@ -41,44 +41,44 @@
             "Slot": "LEFT_ARM"
         }
     ],
-    "rightArm": [
+    "RightArm": [
         {
             "Id": "arm00",
-            "Name": "rightArm00",
+            "Name": "RightArm00",
             "Status": "100",
             "Slot": "RIGHT_ARM"
         },
         {
             "Id": "arm01",
-            "Name": "rightArm01",
+            "Name": "RightArm01",
             "Status": "100",
             "Slot": "RIGHT_ARM"
         }
     ],
-    "leftLeg": [
+    "LeftLeg": [
         {
             "Id": "leg00",
-            "Name": "leftLeg00",
+            "Name": "LeftLeg00",
             "Status": "100",
             "Slot": "LEFT_LEG"
         },
         {
             "Id": "leg01",
-            "Name": "leftLeg01",
+            "Name": "LeftLeg01",
             "Status": "100",
             "Slot": "LEFT_LEG"
         }
     ],
-    "rightLeg": [
+    "RightLeg": [
         {
             "Id": "leg00",
-            "Name": "rightLeg00",
+            "Name": "RightLeg00",
             "Status": "100",
             "Slot": "RIGHT_LEG"
         },
         {
             "Id": "leg01",
-            "Name": "rightLeg01",
+            "Name": "RightLeg01",
             "Status": "100",
             "Slot": "RIGHT_LEG"
         }
