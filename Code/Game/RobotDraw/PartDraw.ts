@@ -65,19 +65,24 @@ class PartDraw extends TBX.Sprite
     }
     private SetArt(Slot: PartSlot): void
     {
+        console.log('setArt', this.Data)
+        console.log('setArt', this.Data.Id)
+        
         switch(Slot) {
-            case PartSlot.Head: this.CreateSpriteSet("Head", "head01"); break;
-            case PartSlot.Torso: this.CreateSpriteSet("Torso", "torso01"); break;
-            case PartSlot.LeftArm: this.CreateSpriteSet("Arm", "arm01"); break;
-            case PartSlot.RightArm: this.CreateSpriteSet("Arm", "arm01"); break;
-            case PartSlot.LeftLeg: this.CreateSpriteSet("Leg", "leg01"); break;
-            case PartSlot.RightLeg: this.CreateSpriteSet("Leg", "leg01"); break;
-            default: this.CreateSpriteSet(Slot, "torso01");
+            case PartSlot.Head: this.CreateSpriteSet("Head", this.Data.Id); break;
+            case PartSlot.Torso: this.CreateSpriteSet("Torso", this.Data.Id); break;
+            case PartSlot.LeftArm: this.CreateSpriteSet("Arm", this.Data.Id); break;
+            case PartSlot.RightArm: this.CreateSpriteSet("Arm", this.Data.Id); break;
+            case PartSlot.LeftLeg: this.CreateSpriteSet("Leg", this.Data.Id); break;
+            case PartSlot.RightLeg: this.CreateSpriteSet("Leg", this.Data.Id); break;
+            default: this.CreateSpriteSet(Slot, this.Data.Id);
         }
     }
-    private CreateSpriteSet(SlotUrl: string, ArtName: string): void
+    private CreateSpriteSet(SlotUrl: string, ArtId: string): void
     {
-        let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + ArtName + ".png";
+        console.log('artId', ArtId)
+
+        let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + ArtId + ".png";
         this.SpriteSets = [new SpriteSet(null, [CompleteUrl], "Default")];
         //this.CurrentSpriteSet = 0;
     }

@@ -7,12 +7,12 @@ const data = require("./sets.json");
 
 class RobotGen {
 
-    public static Any(): Robot {
+    public static randomRobot(): Robot {
         let partSet: PartSet = parsePartSet();
         return new Robot(null, "jsonRobot",
             partSet.head[Math.floor(Math.random() * partSet.head.length)],
-            partSet.torso[Math.floor(Math.random() * partSet.torso.length)],
-            partSet.leftArm[Math.floor(Math.random() * partSet.leftArm.length)],
+            partSet.Torso[Math.floor(Math.random() * partSet.Torso.length)],
+            partSet.LeftArm[Math.floor(Math.random() * partSet.LeftArm.length)],
             partSet.rightArm[Math.floor(Math.random() * partSet.rightArm.length)],
             partSet.leftLeg[Math.floor(Math.random() * partSet.leftLeg.length)],
             partSet.rightLeg[Math.floor(Math.random() * partSet.rightLeg.length)])

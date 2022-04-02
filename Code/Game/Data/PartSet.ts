@@ -5,8 +5,8 @@ export { PartSet }
 class PartSet {
 
     public head: Part[];
-    public torso: Part[];
-    public leftArm: Part[];
+    public Torso: Part[];
+    public LeftArm: Part[];
     public rightArm: Part[];
     public leftLeg: Part[];
     public rightLeg: Part[];

@@ -80,6 +80,7 @@ class RobotDraw extends TBX.Tile
     public ApplyData(Data: Robot): void
     {
         this.Data = Data;
+        console.log('random robot: ', this.Data)
         this.Data.PartsArray.forEach((P: Part) => {
             this.Parts[P.Slot].ApplyData(P);
         });
