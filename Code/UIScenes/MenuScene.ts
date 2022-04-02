@@ -27,6 +27,7 @@ class MenuScene extends UIScene
     {
         this.Name = "Menu";
         this._Title.Text = TBX.Runner.Current.Game.Name;
+        this._Title.Style.Text.Size = 150;
         this._Play = this.CreateButton("Play", 0);
         this._Play.Events.Click.push(this.PlayClick);
         this._Settings = this.CreateButton("Settings", 1);

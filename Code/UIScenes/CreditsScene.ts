@@ -25,12 +25,14 @@ class CreditsScene extends UIScene
     {
         this.Name = "Credits";
         this._Title.Text = "Credits";
-        this.CreateLabel("Johann Kraus", 0);
-        this.CreateLabel("Benjamin Daimio", 1);
-        this.CreateLabel("Elizabeth Sherman", 2);
-        this.CreateLabel("Anung Un Rama", 3);
-        this.CreateLabel("Langdon Everett Caul", 4);
-        this.CreateLabel("special thanks to Roger", 5);
+        this.CreateLabel("Miša Jovanović", -1);
+        this.CreateLabel("Nikola Djordjević", 0);
+        this.CreateLabel("Nikola Dragojlović", 1);
+        this.CreateLabel("Ivan Plavšić", 2);
+        this.CreateLabel("Jelena Ralčić", 3);
+        this.CreateLabel("Filip Abramović", 4);
+        this.CreateLabel("Ivana Jelić", 5);
+        this.CreateLabel("Miloš Manojlović", 6);
         this._Back = this.CreateButton("Back", 3);
         this._Back.Events.Click.push(this.BackClick);
     }

@@ -1,8 +1,8 @@
 import * as TBX from "toybox-engine";
 
 const Settings = {
-    Name: "Robodoc",
-    ForeColor: TBX.Color.FromString("#16264C"),
+    Name: "Rubigo",
+    ForeColor: TBX.Color.Black,
     BackColor: TBX.Color.FromString("#FBFBF8")
 };
 
