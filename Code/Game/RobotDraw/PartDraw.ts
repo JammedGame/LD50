@@ -1,27 +1,21 @@
 export { PartDraw }
 
 import * as TBX from "toybox-engine";
-import { SpriteSet } from "toybox-engine";
 
 import { Part, PartSlot } from "../RobotLogic/Part";
+import { PartHoverDetails } from "./PartHoverDetails";
 
 class PartDraw extends TBX.Tile
 {
     public RData: Part;
     public Hovered: boolean;
     public ParentPosition: TBX.Vertex;
+    private _Details: PartHoverDetails;
     public constructor(Old?: PartDraw)
     {
         super(Old);
         this.Data["Pickable"] = true;
-        if(Old)
-        {
-            
-        }
-        else
-        {
-            
-        }
+        this._Details = new PartHoverDetails();
     }
     public Copy(): PartDraw
     {
@@ -30,21 +24,15 @@ class PartDraw extends TBX.Tile
     public ApplyData(RData: Part): void
     {
         this.RData = RData;
+        this._Details.ApplyData(RData);
         this.SetArt(RData.Slot);
         this.SetDimmensions(RData.Slot);
     }
     public SetHovered(Value: boolean): void
     {
         this.Hovered = Value;
-        if (this.Hovered)
-        {
-            this.Paint = TBX.Color.FromString("#63D1F4");
-        }
-        else
-        {
-            this.Paint = TBX.Color.White;
-        }
-        this.Modified = true;
+        this._Details.SetVisible(Value);
+        this.SetColor();
     }
     public SetPositions(): void
     {
@@ -61,6 +49,7 @@ class PartDraw extends TBX.Tile
     private SetPartPosition(Offset: TBX.Vertex): void
     {
         this.Position = Offset.Add(this.ParentPosition);
+        this._Details.SetPosition(this.Position);
     }
     private SetDimmensions(Slot: PartSlot): void
     {
@@ -95,6 +84,27 @@ class PartDraw extends TBX.Tile
         let CompleteUrl = "Resources/Textures/Parts/" + SlotUrl + "/" + ArtName + ".png";
         this.Collection = new TBX.ImageCollection(null, [CompleteUrl]);
         this.Index = 0;
+    }
+    public OnAttach(Args: any): void
+    {
+        super.OnAttach(Args);
+        Args.Scene.Attach(this._Details);
+    }
+    public OnRemove(Args: any): void
+    {
+        super.OnRemove(Args);
+        Args.Scene.Remove(this._Details);
+    }
+    public SetColor(): void
+    {
+        if (this.Hovered)
+        {
+            this.Paint = TBX.Color.FromString("#63D1F4");
+        }
+        else
+        {
+            this.Paint = TBX.Color.White;
+        }
     }
     public Update() : void
     {
