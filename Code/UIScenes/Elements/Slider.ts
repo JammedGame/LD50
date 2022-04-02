@@ -31,8 +31,8 @@ class Slider extends TBX.UI.Panel
         this.Dock = TBX.UI.DockType.Top;
         this.BackColor = TBX.Color.Empty;
         this.Style.Border.Color = Settings.ForeColor;
-        this.Style.Border.Width = 2;
-        this.Style.Border.Radius = 4;
+        this.Style.Border.Width = 4;
+        this.Style.Border.Radius = 8;
         this._Pointer = new TBX.UI.Panel;
         this._Pointer.Style.Layout.Dock = TBX.UI.DockType.Left;
         this._Pointer.BackColor = Settings.ForeColor;

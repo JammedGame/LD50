@@ -1,18 +1,17 @@
 export { GameScene };
 
 import * as TBX from "toybox-engine";
-import { RobotGen } from "./Data/RobotGen";
-import { PartDraw } from "./RobotDraw/PartDraw";
 
+import Settings from "../Settings";
+import { PartDraw } from "./RobotDraw/PartDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
-import { Part } from "./RobotLogic/Part";
-import { Robot } from "./RobotLogic/Robot";
 
 class GameScene extends TBX.Scene2D
 {
     public static Current:GameScene;
     private _Robot: RobotDraw;
     private _HoveredPart?: PartDraw;
+    private _BackButton: TBX.UI.Button;
     public constructor(Old?:GameScene)
     {
         super(Old);
@@ -35,11 +34,16 @@ class GameScene extends TBX.Scene2D
         this._Robot.SetPosition(new TBX.Vertex(960, 540));
         this.Events.MouseMove.push(this.MouseMove.bind(this));
         this.Attach(this._Robot);
-
+        this._BackButton = this.CreateButton("Menu", TBX.UI.DockType.BottomLeft, new TBX.Vertex(50,50,0));
+        this._BackButton.Events.Click.push(this.GoBack.bind(this));
     }
     public Reset(): void
     {
         
+    }
+    public GoBack(): void
+    {
+        TBX.Runner.Current.SwitchScene("Menu");
     }
     public MouseMove(Game: TBX.Game, Args: any): void
     {
@@ -71,6 +75,21 @@ class GameScene extends TBX.Scene2D
         let Back:TBX.Tile = TBX.SceneObjectUtil.CreateTile(Name, ["Resources/Textures/Backgrounds/"+Name+".png"], new TBX.Vertex(960,540), new TBX.Vertex(1920, 1080, 1));
         Back.Fixed = true;
         this.Attach(Back);
+    }
+    protected CreateButton(Text: string, Dock: TBX.UI.DockType, Position: TBX.Vertex) : TBX.UI.Button
+    {
+        let Button:TBX.UI.Button = new TBX.UI.Button(null, Text);
+        Button.Name = Text;
+        Button.Position = Position;
+        Button.ForeColor = Settings.ForeColor;
+        Button.BackColor = TBX.Color.Empty;
+        Button.Dock = Dock;
+        Button.Style.Border.Color = Settings.ForeColor;
+        Button.Style.Padding.All = 0;
+        Button.Style.Border.Width = 4;
+        Button.Style.Border.Radius = 8;
+        this.Attach(Button);
+        return Button;
     }
     protected CreateLabel(Text:string) : TBX.UI.Label
     {

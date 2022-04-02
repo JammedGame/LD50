@@ -53,8 +53,8 @@ class UIScene extends TBX.Scene2D
         Button.Dock = TBX.UI.DockType.Center;
         Button.Style.Border.Color = Settings.ForeColor;
         Button.Style.Padding.All = 0;
-        Button.Style.Border.Width = 2;
-        Button.Style.Border.Radius = 2;
+        Button.Style.Border.Width = 4;
+        Button.Style.Border.Radius = 8;
         this.Attach(Button);
         return Button;
     }
