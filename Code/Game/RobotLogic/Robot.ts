@@ -1,42 +1,38 @@
 export { Robot }
 
-import { Part } from "./Part";
+import { Part, PartSlot, PartSlotValues } from "./Part";
 
 const UNNAMED = "Unnamed";
 
 class Robot
 {
     public Name: string;
-    public Head: Part;
-    public Torso: Part;
-    public LeftArm: Part;
-    public RightArm: Part;
-    public LeftLeg: Part;
-    public RightLeg: Part;
+    public Parts: { [key: string]: Part }
+    public get PartsArray(): Part[]
+    {
+        return Object.values(this.Parts);
+    }
     public constructor(Old?: Robot)
     {
+        this.Parts = {};
         if(Old)
         {
             this.Name = Old.Name;
-            this.Head = Old.Head.Copy();
-            this.Torso = Old.Torso.Copy();
-            this.LeftArm = Old.LeftArm.Copy();
-            this.RightArm = Old.RightArm.Copy();
-            this.LeftLeg = Old.LeftLeg.Copy();
-            this.RightLeg = Old.RightLeg.Copy();
+            Old.PartsArray.forEach((P: Part) => {
+                this.Parts[P.Slot] = P.Copy();
+            });
         }
         else
         {
             this.Name = UNNAMED;
-            this.Head = new Part();
-            this.Torso = new Part();
-            this.LeftArm = new Part();
-            this.RightArm = new Part();
-            this.LeftLeg = new Part();
-            this.RightLeg = new Part();
+            PartSlotValues().forEach(PartSlotValue => {
+                this.Parts[PartSlotValue] = new Part();
+                this.Parts[PartSlotValue].Slot = PartSlotValue as PartSlot;
+            });
         }
     }
-    public Copy(): Robot {
+    public Copy(): Robot
+    {
         return new Robot(this);
     }
 }
