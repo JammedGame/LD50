@@ -35,7 +35,7 @@ class PartDraw extends TBX.Sprite
     {
         switch(this.Data.Slot) {
             case PartSlot.Head: this.SetPartPosition(new TBX.Vertex(0,-260,0)); break;
-            case PartSlot.Torso: this.SetPartPosition(new TBX.Vertex(0,0,0)); break;
+            case PartSlot.Torso: this.SetPartPosition(new TBX.Vertex(0,0,0.1)); break;
             case PartSlot.LeftArm: this.SetPartPosition(new TBX.Vertex(-185,5,0)); break;
             case PartSlot.RightArm: this.SetPartPosition(new TBX.Vertex(185,5,0)); break;
             case PartSlot.LeftLeg: this.SetPartPosition(new TBX.Vertex(-95,205,0)); break;
@@ -66,13 +66,13 @@ class PartDraw extends TBX.Sprite
     private SetArt(Slot: PartSlot): void
     {
         switch(Slot) {
-            case PartSlot.Head: this.CreateSpriteSet("Head", "head00"); break;
-            case PartSlot.Torso: this.CreateSpriteSet("Torso", "torso00"); break;
-            case PartSlot.LeftArm: this.CreateSpriteSet("Arm", "arm00"); break;
-            case PartSlot.RightArm: this.CreateSpriteSet("Arm", "arm00"); break;
-            case PartSlot.LeftLeg: this.CreateSpriteSet("Leg", "leg00"); break;
-            case PartSlot.RightLeg: this.CreateSpriteSet("Leg", "leg00"); break;
-            default: this.CreateSpriteSet(Slot, "torso00");
+            case PartSlot.Head: this.CreateSpriteSet("Head", "head01"); break;
+            case PartSlot.Torso: this.CreateSpriteSet("Torso", "torso01"); break;
+            case PartSlot.LeftArm: this.CreateSpriteSet("Arm", "arm01"); break;
+            case PartSlot.RightArm: this.CreateSpriteSet("Arm", "arm01"); break;
+            case PartSlot.LeftLeg: this.CreateSpriteSet("Leg", "leg01"); break;
+            case PartSlot.RightLeg: this.CreateSpriteSet("Leg", "leg01"); break;
+            default: this.CreateSpriteSet(Slot, "torso01");
         }
     }
     private CreateSpriteSet(SlotUrl: string, ArtName: string): void
