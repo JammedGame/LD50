@@ -7,11 +7,13 @@ import { Part, PartSlot } from "../RobotLogic/Part";
 
 class PartDraw extends TBX.Sprite
 {
-    public Data: Part;
+    public RData: Part;
+    public Hovered: boolean;
     public ParentPosition: TBX.Vertex;
     public constructor(Old?: PartDraw)
     {
         super(Old);
+        this.Data["Pickable"] = true;
         if(Old)
         {
             
@@ -25,15 +27,28 @@ class PartDraw extends TBX.Sprite
     {
         return new PartDraw(this);
     }
-    public ApplyData(Data: Part): void
+    public ApplyData(RData: Part): void
     {
-        this.Data = Data;
-        this.SetArt(Data.Slot);
-        this.SetDimmensions(Data.Slot);
+        this.RData = RData;
+        this.SetArt(RData.Slot);
+        this.SetDimmensions(RData.Slot);
+    }
+    public SetHovered(Value: boolean): void
+    {
+        this.Hovered = Value;
+        if (this.Hovered)
+        {
+            this.Paint = TBX.Color.FromString("#63D1F4");
+        }
+        else
+        {
+            this.Paint = TBX.Color.White;
+        }
+        this.Modified = true;
     }
     public SetPositions(): void
     {
-        switch(this.Data.Slot) {
+        switch(this.RData.Slot) {
             case PartSlot.Head: this.SetPartPosition(new TBX.Vertex(0,-260,0)); break;
             case PartSlot.Torso: this.SetPartPosition(new TBX.Vertex(0,0,0.1)); break;
             case PartSlot.LeftArm: this.SetPartPosition(new TBX.Vertex(-185,5,0)); break;
@@ -83,6 +98,5 @@ class PartDraw extends TBX.Sprite
     }
     public Update() : void
     {
-        
     }
 }
