@@ -16,7 +16,7 @@ function PartSlotValues(): string[] {
     let Values = [];
     for (let Value in PartSlot) {
         if (isNaN(Number(Value))) {
-            Values.push(Value);
+            Values.push(PartSlot[Value]);
         }
     }
     return Values;

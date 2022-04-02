@@ -2,8 +2,6 @@ export { GameScene };
 
 import * as TBX from "toybox-engine";
 
-import { Level } from "./Elements/Level";
-import { Player } from "./Elements/Player";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
 
 class GameScene extends TBX.Scene2D
@@ -28,6 +26,8 @@ class GameScene extends TBX.Scene2D
         this.Name = "Game";
         this.CreateBackground("Paper");
         this._Robot = new RobotDraw();
+        this._Robot.ApplyData(this._Robot.GenerateRobot());
+        this._Robot.SetPosition(new TBX.Vertex(960, 540));
         this.Attach(this._Robot);
     }
     public Reset(): void
