@@ -9,6 +9,7 @@ import { RobotDraw } from "./RobotDraw/RobotDraw";
 import { PartGen } from "./Data/PartGen";
 import { SlotType } from "./RobotLogic/Robot";
 import { ResourceType } from "./RobotLogic/ResourceType";
+import { Shop } from "./Shop/Shop";
 import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 import { InventoryIcon } from "./Interface/Inventory/InventoryIcon";
 import { InterfaceFactory } from "./Interface/InterfaceFactory";
