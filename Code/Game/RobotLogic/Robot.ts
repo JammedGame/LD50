@@ -81,6 +81,12 @@ class Robot {
             amount += x.GetGatherAmount(resourceType);
         });
 
+        // full set bonus
+        if (this.Parts.every(x => x.PrimaryResource == resourceType))
+        {
+            amount += 5;
+        }
+
         return amount;
     }
 }
