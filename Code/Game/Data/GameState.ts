@@ -1,6 +1,6 @@
 import { Part } from "../RobotLogic/Part";
 import { ResourceType } from "../RobotLogic/ResourceType";
-import { Robot } from "../RobotLogic/Robot";
+import { Robot, SlotType } from "../RobotLogic/Robot";
 import { PartGen } from "./PartGen";
 import { RobotGen } from "./RobotGen";
 
@@ -21,6 +21,51 @@ class GameState
 		this.currentRobot = RobotGen.randomRobot();
 		this.inventory = new InventoryState();
 		this.missions = new ActiveMissionsState();
+	}
+
+	public BuyPartFromShop(part: Part, slotType: SlotType)
+	{
+		if (this.resources.CanAfford(ResourceType.Iron, part.GetBuyPrice()) && this.shop.BuyPart(part))
+		{
+			this.resources.Spend(ResourceType.Iron, part.GetBuyPrice());
+			this.PutPartIntoRobot(slotType, part);
+		}
+	}
+
+	public SwapPartFromInventory(part: Part, slotType: SlotType)
+	{
+		if (this.inventory.Remove(part))
+		{
+			this.PutPartIntoRobot(slotType, part);
+		}
+	}
+
+
+	public SellPartFromInventory(part: Part)
+	{
+		if (this.inventory.Remove(part))
+		{
+			this.resources.Give(ResourceType.Iron, part.GetSellingPrice());
+		}
+	}
+
+	private PutPartIntoRobot(slotType: SlotType, newPart: Part)
+	{
+		var currentPart: Part = this.currentRobot.Slots[slotType];
+		if (currentPart == newPart)
+		{
+			console.log(`Tried to set part that's already here: ${newPart}`);
+			return;
+		}
+
+		// move current part to the inventory
+		if (currentPart != null)
+		{
+			this.inventory.Add(currentPart);
+		}
+
+		// update robot
+		this.currentRobot.Slots[slotType] = newPart;
 	}
 }
 
@@ -98,7 +143,7 @@ class InventoryState
 			return true;
 		}
 
-		console.info('Failed to find part in inventory: ${part}');
+		console.info(`Failed to find part in inventory: ${part}`);
 		return false;
 	}
 
@@ -117,16 +162,18 @@ class ShopState
 		this.parts = PartGen.generateInitialPartOffers();
 	}
 
-	public Buy(part: Part): boolean
+	public BuyPart(part: Part): boolean
 	{
+		// check if this is available in shop.
 		const index = this.parts.indexOf(part);
 		if (index == -1)
 		{
 			return false;
 		}
 
+		// replace item from shop with new draw
 		this.parts.splice(index, 1);
-		this.parts.push();
+		this.parts.push(PartGen.generatePart(part.Type, part.PrimaryResource));
 		return true;
 	}
 }

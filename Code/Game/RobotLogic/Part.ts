@@ -55,4 +55,17 @@ class Part
     {
         return new Part(this);
     }
+
+    public GetBuyPrice(): number {
+        return 50; // fixed!
+    }
+
+    public GetSellingPrice(): number {
+        if (this.Status >= 100) return 40;
+        if (this.Status >= 80) return 40;
+        if (this.Status >= 60) return 20;
+        if (this.Status >= 40) return 10;
+        if (this.Status > 0) return 5;
+        return 1;
+	}
 }
