@@ -1,3 +1,5 @@
+import {ResourceType} from './ResourceType'
+
 export { Part, PartType, PartTypeValues }
 
 const UNNAMED = "Unnamed";
@@ -26,6 +28,8 @@ class Part
     public Name: string;
     public Status: number;
     public Type: PartType;
+    public PrimaryResource: ResourceType;
+
     public constructor(Old?: Part, Type?: PartType)
     {
         if(Old)
@@ -34,6 +38,7 @@ class Part
             this.Name = Old.Name;
             this.Status = Old.Status;
             this.Type = Old.Type;
+            this.PrimaryResource = Old.PrimaryResource;
         }
         else
         {
@@ -41,6 +46,7 @@ class Part
             this.Name = UNNAMED;
             this.Status = 100;
             this.Type = Type || PartType.Head;
+            this.PrimaryResource = ResourceType.GOLD;
         }
     }
     public Copy(): Part

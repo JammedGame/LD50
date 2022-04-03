@@ -6,6 +6,9 @@ import Settings from "../Settings";
 import { RobotGen } from "./Data/RobotGen";
 import { SlotDraw } from "./RobotDraw/SlotDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
+import { PartGen } from "./Data/PartGen";
+import { SlotType } from "./RobotLogic/Robot";
+import { ResourceType } from "./RobotLogic/ResourceType";
 
 class GameScene extends TBX.Scene2D
 {
@@ -38,6 +41,7 @@ class GameScene extends TBX.Scene2D
         this.Attach(this._Robot);
         this._BackButton = this.CreateButton("Menu", TBX.UI.DockType.BottomLeft, new TBX.Vertex(50,50,0));
         this._BackButton.Events.Click.push(this.GoBack.bind(this));
+        console.log("part", PartGen.generatePart(SlotType.Head, ResourceType.GOLD));
     }
     public Reset(): void
     {

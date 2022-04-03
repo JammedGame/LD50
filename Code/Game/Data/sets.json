@@ -4,25 +4,29 @@
             "Id": "head00",
             "Name": "head00",
             "Status": "100",
-            "Type": "Head"
+            "Type": "Head",
+            "PrimaryResource": "gold"
         },
         {
             "Id": "head01",
             "Name": "head01",
             "Status": "100",
-            "Type": "Head"
+            "Type": "Head",
+            "PrimaryResource": "gold"
         },
         {
             "Id": "head02",
             "Name": "head02",
             "Status": "100",
-            "Type": "Head"
+            "Type": "Head",
+            "PrimaryResource": "gas"
         },
         {
             "Id": "head03",
             "Name": "head03",
             "Status": "100",
-            "Type": "Head"
+            "Type": "Head",
+            "PrimaryResource": "gas"
         }
     ],
     "Torso": [
@@ -30,25 +34,29 @@
             "Id": "torso00",
             "Name": "Torso00",
             "Status": "100",
-            "Type": "Torso"
+            "Type": "Torso",
+            "PrimaryResource": "gold"
         },
         {
             "Id": "torso01",
             "Name": "Torso01",
             "Status": "100",
-            "Type": "Torso"
+            "Type": "Torso",
+            "PrimaryResource": "gas"
         },
         {
             "Id": "torso02",
             "Name": "Torso02",
             "Status": "100",
-            "Type": "Torso"
+            "Type": "Torso",
+            "PrimaryResource": "plutonium"
         },
         {
             "Id": "torso03",
             "Name": "Torso03",
             "Status": "100",
-            "Type": "Torso"
+            "Type": "Torso",
+            "PrimaryResource": "wood"
         }
     ],
     "Arm": [
@@ -56,25 +64,29 @@
             "Id": "arm00",
             "Name": "LeftArm00",
             "Status": "100",
-            "Type": "Arm"
+            "Type": "Arm",
+            "PrimaryResource": "gold"
         },
         {
             "Id": "arm01",
             "Name": "LeftArm01",
             "Status": "100",
-            "Type": "Arm"
+            "Type": "Arm",
+            "PrimaryResource": "gas"
         },
         {
             "Id": "arm02",
             "Name": "LeftArm02",
             "Status": "100",
-            "Type": "Arm"
+            "Type": "Arm",
+            "PrimaryResource": "plutonium"
         },
         {
             "Id": "arm03",
             "Name": "LeftArm03",
             "Status": "100",
-            "Type": "Arm"
+            "Type": "Arm",
+            "PrimaryResource": "wood"
         }
     ],
     "Leg": [
@@ -82,25 +94,29 @@
             "Id": "leg00",
             "Name": "LeftLeg00",
             "Status": "100",
-            "Type": "Leg"
+            "Type": "Leg",
+            "PrimaryResource": "gold"
         },
         {
             "Id": "leg01",
             "Name": "LeftLeg01",
             "Status": "100",
-            "Type": "Leg"
+            "Type": "Leg",
+            "PrimaryResource": "gas"
         },
         {
             "Id": "leg02",
             "Name": "LeftLeg02",
             "Status": "100",
-            "Type": "Leg"
+            "Type": "Leg",
+            "PrimaryResource": "plutonium"
         },
         {
             "Id": "leg03",
             "Name": "LeftLeg03",
             "Status": "100",
-            "Type": "Leg"
+            "Type": "Leg",
+            "PrimaryResource": "wood"
         }
     ]
 }
