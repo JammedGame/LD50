@@ -12,10 +12,12 @@ import { ResourceType } from "./RobotLogic/ResourceType";
 import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 import { InventoryIcon } from "./Interface/Inventory/InventoryIcon";
 import { InterfaceFactory } from "./Interface/InterfaceFactory";
+import { GameState } from "./Data/GameState";
 
 class GameScene extends TBX.Scene2D
 {
-    public static Current:GameScene;
+    public static Current: GameScene;
+    public gameState: GameState;
     private _Robot: RobotDraw;
     private _HoveredSlot?: SlotDraw;
     private _BackButton: TBX.UI.Button;
@@ -36,6 +38,8 @@ class GameScene extends TBX.Scene2D
     }
     private InitGameScene(): void
     {
+        this.gameState = new GameState();
+
         this.Name = "Game";
         this.CreateBackground("Paper");
         this._Robot = new RobotDraw();
@@ -53,7 +57,7 @@ class GameScene extends TBX.Scene2D
     }
     public Reset(): void
     {
-        
+
     }
     public GoBack(): void
     {
