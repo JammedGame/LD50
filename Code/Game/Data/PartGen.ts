@@ -1,4 +1,4 @@
-import { Part } from "../RobotLogic/Part";
+import { Part, PartType } from "../RobotLogic/Part";
 import { ResourceType } from "../RobotLogic/ResourceType";
 import { SlotType } from "../RobotLogic/Robot";
 import { PartSet } from "./PartSet";
@@ -6,43 +6,36 @@ import { PartSet } from "./PartSet";
 export { PartGen }
 
 const data = require("./sets.json");
+const allResourceTypes: ResourceType[] = [ResourceType.Oil, ResourceType.Lithium, ResourceType.Platina, ResourceType.Plutonium, ResourceType.Gas, ResourceType.Iron];
+const allPartTypes: PartType[] = [ PartType.Head, PartType.Torso, PartType.Arm, PartType.Leg ];
 
 class PartGen {
 
-    public static generateParts(slotType: SlotType): Part[] {
+    public static generateInitialPartOffers(): Part[]
+    {
+        var allParts: Part[] = [];
 
-        let slotPart: Part[] = parsePartSet()[slotType];
-
-        let primaryGold: Part[] = new Array();
-        let primaryGas: Part[] = new Array();
-
-        slotPart.forEach(element => {
-            switch (element.PrimaryResource) {
-                case ResourceType.GOLD: primaryGold.push(element); break;
-                case ResourceType.GAS: primaryGas.push(element); break;
-            }
+        allPartTypes.forEach(partType => {
+            allResourceTypes.forEach(resourceType => {
+                var newPart: Part = this.generatePart(partType, resourceType);
+                if (newPart == null || newPart == undefined)
+                {
+                    console.log(`FAILED to find part for ${partType} ${resourceType}`);
+                    return;
+                }
+                allParts.push(newPart);
+            });
         });
 
-        // slotPart[Math.floor(Math.random() * slotPart[slotType].length)]    
+        console.log(allParts);
 
-        console.log("primaryGold:", primaryGold)
-        console.log("primaryGas:", primaryGas)
-        return primaryGold;
+        return allParts;
     }
 
-    public static generatePart(slotType: SlotType, primaryResource: ResourceType): Part {
-
-        let slotPart: Part[] = parsePartSet()[slotType];
-
-        console.log("slotPart", slotPart)
-
-        const result  = slotPart.filter(element => {
-            return element.PrimaryResource === primaryResource
-        })
-
-        console.log("result", result)
-
-        return result[Math.floor(Math.random() * result.length)];
+    public static generatePart(partType: PartType, primaryResource: ResourceType): Part {
+        let partsForType: Part[] = parsePartSet()[partType].filter(element => element.PrimaryResource === primaryResource);
+        let newPart: Part = partsForType[Math.floor(Math.random() * partsForType.length)];
+        return newPart;
     }
 
 }

@@ -1,6 +1,7 @@
 import { Part } from "../RobotLogic/Part";
 import { ResourceType } from "../RobotLogic/ResourceType";
 import { Robot } from "../RobotLogic/Robot";
+import { PartGen } from "./PartGen";
 
 export { GameState }
 
@@ -28,23 +29,28 @@ class ResourceStorage
 
 	constructor()
 	{
-		this.resources.push(new SingleResourceState(ResourceType.GAS, 100));
-		this.resources.push(new SingleResourceState(ResourceType.GOLD, 100));
+		this.resources = [];
+		this.resources.push(new SingleResourceState(ResourceType.Oil, 100));
+		this.resources.push(new SingleResourceState(ResourceType.Lithium, 100));
+		this.resources.push(new SingleResourceState(ResourceType.Platina, 100));
+		this.resources.push(new SingleResourceState(ResourceType.Plutonium, 100));
+		this.resources.push(new SingleResourceState(ResourceType.Gas, 100));
+		this.resources.push(new SingleResourceState(ResourceType.Iron, 100));
 	}
 
-	public GetResource(resourceType: ResourceType): SingleResourceState
+	private getResource(resourceType: ResourceType): SingleResourceState
 	{
 		return this.resources.find(x => x.resourceType == resourceType);
 	}
 
 	public GetAmount(resourceType: ResourceType): number
 	{
-		return this.GetResource(resourceType).amount;
+		return this.getResource(resourceType).amount;
 	}
 
 	public Give(resourceType: ResourceType, amount: number): void
 	{
-		this.GetResource(resourceType).amount += amount;
+		this.getResource(resourceType).amount += amount;
 	}
 
 	public CanAfford(resourceType: ResourceType, amount: number): boolean
@@ -55,7 +61,7 @@ class ResourceStorage
 	public Spend(resourceType: ResourceType, amount: number): boolean
 	{
 		// return false if overspent.
-		var resource = this.GetResource(resourceType);
+		var resource = this.getResource(resourceType);
 		resource.amount -= amount;
 		return resource.amount >= 0;
 	}
@@ -107,14 +113,7 @@ class ShopState
 
 	public constructor()
 	{
-		this.parts = this.GenerateInitialOffers();
-	}
-
-	public GenerateInitialOffers(): Part[]
-	{
-		var _part: Part[] = [];
-		// todo generate parts.
-		return _part;
+		this.parts = PartGen.generateInitialPartOffers();
 	}
 
 	public Buy(part: Part): boolean
@@ -127,8 +126,7 @@ class ShopState
 
 		this.parts.splice(index, 1);
 
-		var newPart: Part = new Part();
-		newPart.PrimaryResource
+		var newPart: PartGen.generatePart();
 
 		this.parts.push();
 		return true;
@@ -147,9 +145,9 @@ class ActiveMissionsState
 	public GenerateMissions(): void
 	{
 		this.missions = [];
-		this.missions.push(new SingleMissionState(ResourceType.GAS, ResourceType.GOLD));
-		this.missions.push(new SingleMissionState(ResourceType.GAS, ResourceType.GOLD));
-		this.missions.push(new SingleMissionState(ResourceType.GAS, ResourceType.GOLD));
+		this.missions.push(new SingleMissionState(ResourceType.Gas, ResourceType.Lithium));
+		this.missions.push(new SingleMissionState(ResourceType.Gas, ResourceType.Lithium));
+		this.missions.push(new SingleMissionState(ResourceType.Gas, ResourceType.Lithium));
 	}
 }
 

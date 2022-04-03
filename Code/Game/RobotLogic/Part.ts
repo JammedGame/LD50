@@ -29,6 +29,8 @@ class Part
     public Status: number;
     public Type: PartType;
     public PrimaryResource: ResourceType;
+    public SecondaryResource: ResourceType;
+    public TeritallyResource: ResourceType;
 
     public constructor(Old?: Part, Type?: PartType)
     {
@@ -46,7 +48,7 @@ class Part
             this.Name = UNNAMED;
             this.Status = 100;
             this.Type = Type || PartType.Head;
-            this.PrimaryResource = ResourceType.GOLD;
+            this.PrimaryResource = ResourceType.Lithium;
         }
     }
     public Copy(): Part
