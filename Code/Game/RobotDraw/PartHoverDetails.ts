@@ -10,7 +10,8 @@ class PartHoverDetails extends TBX.UI.Panel
     public RData: Part;
     public Hovered: boolean;
     public ParentPosition: TBX.Vertex;
-    public Status: TBX.UI.Label;
+    public SlotLabel: TBX.UI.Label;
+    public StatusLabel: TBX.UI.Label;
     public constructor(Old?: PartHoverDetails)
     {
         super(Old);
@@ -30,19 +31,28 @@ class PartHoverDetails extends TBX.UI.Panel
         this.Style.Layout.Dock = TBX.UI.DockType.TopLeft;
         this.Size = new TBX.Vertex(180, 80);
         this.BackColor = TBX.Color.FromRGBA(255,255,255,200);
+        this.Style.Values.flexDirection = "column";
+        this.Style.Values.flexDirection = "column";
         this.Style.Border.Color = Settings.ForeColor;
         this.Style.Border.Radius = 8;
         this.Style.Border.Width = 4;
-        this.Status = new TBX.UI.Label();
-        this.Status.Style.Text.Size = 32;
-        this.Status.ForeColor = Settings.ForeColor;
-        this.Status.Dock = TBX.UI.DockType.None;
-        this.Attach(this.Status);
+        this.SlotLabel = new TBX.UI.Label();
+        this.SlotLabel.Style.Text.Size = 16;
+        this.SlotLabel.Style.Values.textTransform = "uppercase";
+        this.SlotLabel.ForeColor = Settings.ForeColor2;
+        this.SlotLabel.Dock = TBX.UI.DockType.None;
+        this.Attach(this.SlotLabel);
+        this.StatusLabel = new TBX.UI.Label();
+        this.StatusLabel.Style.Text.Size = 32;
+        this.StatusLabel.ForeColor = Settings.ForeColor;
+        this.StatusLabel.Dock = TBX.UI.DockType.None;
+        this.Attach(this.StatusLabel);
         this.Update();
     }
     public ApplyData(RData: Part): void
     {
-        this.Status.Text = "Status: " + RData.Status + "%";
+        this.SlotLabel.Text = RData.Slot;
+        this.StatusLabel.Text = "Status: " + RData.Status + "%";
     }
     public SetVisible(Value: boolean): void
     {
