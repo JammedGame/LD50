@@ -36,13 +36,15 @@ interface IRobotData
     Parts: { [key: string]: Part };
 }
 
-class Robot
-{
+class Robot {
+
     public Name: string;
-    public Slots: { [key: string]: Part }
+    public Slots: { [key: string]: Part | undefined }
+
     public get Parts(): Part[] {
         return Object.values(this.Slots);
     }
+
     public constructor(Old?: Robot, Data?: IRobotData) {
         this.Slots = {};
         if (Data) {
@@ -60,11 +62,11 @@ class Robot
         else {
             this.Name = UNNAMED;
             SlotTypeValues().forEach((Type: SlotType) => {
-                this.Slots[Type] = new Part();
-                this.Slots[Type].Type = SlotTypeToPartType(Type);
+                this.Slots[Type] = undefined;
             });
         }
     }
+
     public Copy(): Robot {
         return new Robot(this);
     }

@@ -6,9 +6,11 @@ import { Part, PartType } from "../RobotLogic/Part";
 import { SlotType } from "../RobotLogic/Robot";
 import { PartHoverDetails } from "./PartHoverDetails";
 
+const PICKABLE = "Pickable";
+
 class SlotDraw extends TBX.Tile
 {
-    public RData: Part;
+    public RData: Part | undefined;
     public partType: PartType;
     public slotType: SlotType;
     public Hovered: boolean;
@@ -17,25 +19,39 @@ class SlotDraw extends TBX.Tile
     public constructor(Old?: SlotDraw)
     {
         super(Old);
-        this.Data["Pickable"] = true;
+        this.Data[PICKABLE] = true;
         this._Details = new PartHoverDetails();
+        if (Old) {
+            this.RData = Old.RData;
+            this.partType = Old.partType;
+            this.slotType = Old.slotType;
+            this.ParentPosition = Old.ParentPosition;
+        }
     }
     public Copy(): SlotDraw
     {
         return new SlotDraw(this);
     }
-    public ApplyData(RData: Part): void
+    public ApplyData(RData?: Part): void
     {
         this.RData = RData;
-        this._Details.ApplyData(RData);
+        if (RData) {
+            this._Details.ApplyData(RData);
+        } else {
+            this.SetHovered(false);
+        }
         this.SetArt();
         this.SetDimmensions();
     }
     public SetHovered(Value: boolean): void
     {
-        this.Hovered = Value;
-        this._Details.SetVisible(Value);
-        this.SetColor();
+        if (this.RData) {
+            this.Hovered = Value;
+            this._Details.SetVisible(Value);
+            this.SetColor();
+        } else {
+            this._Details.SetVisible(false);
+        }
     }
     public SetPositions(): void
     {
@@ -72,9 +88,16 @@ class SlotDraw extends TBX.Tile
     }
     private SetArt(): void
     {
-        if(this.RData)
-        {
+        if(this.RData) {
+            this.Active = true;
             this.CreateTileset(this.RData.Type, this.RData.Id);
+        } else {
+            this.Active = false;
+            if (this.slotType === SlotType.Torso) {
+                this.Active = true;
+                this.CreateTileset(PartType.Torso, "TorsoRig");
+                this.Paint = TBX.Color.White;
+            }
         }
     }
     private CreateTileset(Type: PartType, Id: string): void

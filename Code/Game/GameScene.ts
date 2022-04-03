@@ -71,6 +71,7 @@ class GameScene extends TBX.Scene2D
             if (SceneObject && SceneObject instanceof SlotDraw) {
                 const PickedPart = SceneObject as unknown as SlotDraw;
                 this._PickedUpSlot = new SlotDraw(PickedPart);
+                this._Robot.RemoveFromSlot(PickedPart.slotType);
                 this.Attach(this._PickedUpSlot);
             }
         }
@@ -115,10 +116,9 @@ class GameScene extends TBX.Scene2D
                 this._PickedUpSlot = undefined;
                 console.info('sold');
             } else {
-                // Return to slot
+                this._Robot.AttachToSlot(this._PickedUpSlot.slotType, this._PickedUpSlot.RData);
                 this.Remove(this._PickedUpSlot);
                 this._PickedUpSlot = undefined;
-                console.info('none');
             }
         }
     }

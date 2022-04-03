@@ -4,6 +4,7 @@ import * as TBX from "toybox-engine";
 
 import { SlotDraw } from "./SlotDraw";
 import { Robot, SlotType, SlotTypeToPartType, SlotTypeValues } from "../RobotLogic/Robot";
+import { Part } from "../RobotLogic/Part";
 
 class RobotDraw extends TBX.Tile {
     
@@ -44,6 +45,16 @@ class RobotDraw extends TBX.Tile {
             Slot.ParentPosition = Value;
             Slot.SetPositions();
         });
+    }
+
+    public RemoveFromSlot(slotType: SlotType): void {
+        this.RData.Parts[slotType] = undefined;
+        this.SlotDraws[slotType].ApplyData(undefined);
+    }
+
+    public AttachToSlot(slotType: SlotType, part: Part): void {
+        this.RData.Parts[slotType] = part;
+        this.SlotDraws[slotType].ApplyData(part);
     }
 
     public OnAttach(Args: any): void {

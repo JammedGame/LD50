@@ -20,14 +20,12 @@ class PartGen {
                 var newPart: Part = this.generatePart(partType, resourceType);
                 if (newPart == null || newPart == undefined)
                 {
-                    console.log(`FAILED to find part for ${partType} ${resourceType}`);
+                    console.info(`FAILED to find part for ${partType} ${resourceType}`);
                     return;
                 }
                 allParts.push(newPart);
             });
         });
-
-        console.log(allParts);
 
         return allParts;
     }
