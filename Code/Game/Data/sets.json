@@ -27,6 +27,20 @@
             "Status": "100",
             "Type": "Head",
             "PrimaryResource": "gas"
+        },
+        {
+            "Id": "head04",
+            "Name": "head04",
+            "Status": "100",
+            "Type": "Head",
+            "PrimaryResource": "gas"
+        },
+        {
+            "Id": "head05",
+            "Name": "head05",
+            "Status": "100",
+            "Type": "Head",
+            "PrimaryResource": "gas"
         }
     ],
     "Torso": [
@@ -54,6 +68,20 @@
         {
             "Id": "torso03",
             "Name": "Torso03",
+            "Status": "100",
+            "Type": "Torso",
+            "PrimaryResource": "wood"
+        },
+        {
+            "Id": "torso04",
+            "Name": "Torso04",
+            "Status": "100",
+            "Type": "Torso",
+            "PrimaryResource": "plutonium"
+        },
+        {
+            "Id": "torso05",
+            "Name": "Torso05",
             "Status": "100",
             "Type": "Torso",
             "PrimaryResource": "wood"
@@ -87,6 +115,20 @@
             "Status": "100",
             "Type": "Arm",
             "PrimaryResource": "wood"
+        },
+        {
+            "Id": "arm04",
+            "Name": "LeftArm02",
+            "Status": "100",
+            "Type": "Arm",
+            "PrimaryResource": "plutonium"
+        },
+        {
+            "Id": "arm05",
+            "Name": "LeftArm03",
+            "Status": "100",
+            "Type": "Arm",
+            "PrimaryResource": "wood"
         }
     ],
     "Leg": [
@@ -114,6 +156,20 @@
         {
             "Id": "leg03",
             "Name": "LeftLeg03",
+            "Status": "100",
+            "Type": "Leg",
+            "PrimaryResource": "wood"
+        },
+        {
+            "Id": "leg04",
+            "Name": "LeftLeg04",
+            "Status": "100",
+            "Type": "Leg",
+            "PrimaryResource": "plutonium"
+        },
+        {
+            "Id": "leg05",
+            "Name": "LeftLeg05",
             "Status": "100",
             "Type": "Leg",
             "PrimaryResource": "wood"

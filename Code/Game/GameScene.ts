@@ -35,7 +35,7 @@ class GameScene extends TBX.Scene2D
         this.CreateBackground("Paper");
         this._Robot = new RobotDraw();
         // this._Robot.ApplyData(RobotGen.randomRobot());
-        this._Robot.ApplyData(RobotGen.generateSet(3));
+        this._Robot.ApplyData(RobotGen.generateSet(5));
         this._Robot.SetPosition(new TBX.Vertex(960, 540));
         this.Events.MouseMove.push(this.MouseMove.bind(this));
         this.Attach(this._Robot);
