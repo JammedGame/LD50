@@ -48,6 +48,13 @@
             "Status": "100",
             "Type": "Head",
             "PrimaryResource": "lithium"
+        },
+        {
+            "Id": "head07",
+            "Name": "head07",
+            "Status": "100",
+            "Type": "Head",
+            "PrimaryResource": "plutonium"
         }
     ],
     "Torso": [
@@ -99,6 +106,13 @@
             "Status": "100",
             "Type": "Torso",
             "PrimaryResource": "lithium"
+        },
+        {
+            "Id": "torso07",
+            "Name": "Torso07",
+            "Status": "100",
+            "Type": "Torso",
+            "PrimaryResource": "plutonium"
         }
     ],
     "Arm": [
@@ -150,6 +164,13 @@
             "Status": "100",
             "Type": "Arm",
             "PrimaryResource": "lithium"
+        },
+        {
+            "Id": "arm07",
+            "Name": "LeftArm07",
+            "Status": "100",
+            "Type": "Arm",
+            "PrimaryResource": "plutonium"
         }
     ],
     "Leg": [
@@ -201,6 +222,13 @@
             "Status": "100",
             "Type": "Leg",
             "PrimaryResource": "lithium"
+        },
+        {
+            "Id": "leg07",
+            "Name": "LeftLeg07",
+            "Status": "100",
+            "Type": "Leg",
+            "PrimaryResource": "plutonium"
         }
     ]
 }
