@@ -41,6 +41,8 @@ class PartHoverDetails extends TBX.UI.Panel
         this.SlotLabel.Style.Values.textTransform = "uppercase";
         this.SlotLabel.ForeColor = Settings.ForeColor2;
         this.SlotLabel.Dock = TBX.UI.DockType.None;
+        this.SlotLabel.Style.Margin.Top = -10;
+        this.SlotLabel.Style.Margin.Bottom = -10;
         this.Attach(this.SlotLabel);
         this.StatusLabel = new TBX.UI.Label();
         this.StatusLabel.Style.Text.Size = 32;
@@ -51,7 +53,7 @@ class PartHoverDetails extends TBX.UI.Panel
     }
     public ApplyData(RData: Part): void
     {
-        this.SlotLabel.Text = RData.Slot;
+        this.SlotLabel.Text = RData.Type;
         this.StatusLabel.Text = "Status: " + RData.Status + "%";
     }
     public SetVisible(Value: boolean): void

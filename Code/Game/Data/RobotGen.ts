@@ -1,4 +1,4 @@
-import { Robot } from "../RobotLogic/Robot";
+import { Robot, SlotType, SlotTypeToPartType, SlotTypeValues } from "../RobotLogic/Robot";
 import { PartSet } from "./PartSet";
 
 export { RobotGen }
@@ -9,13 +9,16 @@ class RobotGen {
 
     public static randomRobot(): Robot {
         let partSet: PartSet = parsePartSet();
-        return new Robot(null, "jsonRobot",
-            partSet.Head[Math.floor(Math.random() * partSet.Head.length)],
-            partSet.Torso[Math.floor(Math.random() * partSet.Torso.length)],
-            partSet.LeftArm[Math.floor(Math.random() * partSet.LeftArm.length)],
-            partSet.RightArm[Math.floor(Math.random() * partSet.RightArm.length)],
-            partSet.LeftLeg[Math.floor(Math.random() * partSet.LeftLeg.length)],
-            partSet.RightLeg[Math.floor(Math.random() * partSet.RightLeg.length)])
+        let RobotData = {
+            Name: "jsonRobot",
+            Parts: {}
+        }
+        SlotTypeValues().forEach(slotType => {
+            const partType = SlotTypeToPartType(slotType as SlotType);
+            RobotData.Parts[slotType]
+                = partSet[partType][Math.floor(Math.random() * partSet[partType].length)]
+        });
+        return new Robot(null, RobotData);
     }
 }
 

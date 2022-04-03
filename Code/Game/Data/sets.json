@@ -4,19 +4,19 @@
             "Id": "head00",
             "Name": "head00",
             "Status": "100",
-            "Slot": "HEAD"
+            "Type": "Head"
         },
         {
             "Id": "head01",
             "Name": "head01",
             "Status": "100",
-            "Slot": "HEAD"
+            "Type": "Head"
         },
         {
             "Id": "head02",
             "Name": "head02",
             "Status": "100",
-            "Slot": "HEAD"
+            "Type": "Head"
         }
     ],
     "Torso": [
@@ -24,99 +24,59 @@
             "Id": "torso00",
             "Name": "Torso00",
             "Status": "100",
-            "Slot": "TORSO"
+            "Type": "Torso"
         },
         {
             "Id": "torso01",
             "Name": "Torso01",
             "Status": "100",
-            "Slot": "TORSO"
+            "Type": "Torso"
         },
         {
             "Id": "torso02",
             "Name": "Torso02",
             "Status": "100",
-            "Slot": "TORSO"
+            "Type": "Torso"
         }
     ],
-    "LeftArm": [
+    "Arm": [
         {
             "Id": "arm00",
             "Name": "LeftArm00",
             "Status": "100",
-            "Slot": "LEFT_ARM"
+            "Type": "Arm"
         },
         {
             "Id": "arm01",
             "Name": "LeftArm01",
             "Status": "100",
-            "Slot": "LEFT_ARM"
+            "Type": "Arm"
         },
         {
             "Id": "arm02",
             "Name": "LeftArm02",
             "Status": "100",
-            "Slot": "LEFT_ARM"
+            "Type": "Arm"
         }
     ],
-    "RightArm": [
-        {
-            "Id": "arm00",
-            "Name": "RightArm00",
-            "Status": "100",
-            "Slot": "RIGHT_ARM"
-        },
-        {
-            "Id": "arm01",
-            "Name": "RightArm01",
-            "Status": "100",
-            "Slot": "RIGHT_ARM"
-        },
-        {
-            "Id": "arm02",
-            "Name": "RightArm02",
-            "Status": "100",
-            "Slot": "RIGHT_ARM"
-        }
-    ],
-    "LeftLeg": [
+    "Leg": [
         {
             "Id": "leg00",
             "Name": "LeftLeg00",
             "Status": "100",
-            "Slot": "LEFT_LEG"
+            "Type": "Leg"
         },
         {
             "Id": "leg01",
             "Name": "LeftLeg01",
             "Status": "100",
-            "Slot": "LEFT_LEG"
+            "Type": "Leg"
         },
         {
             "Id": "leg02",
             "Name": "LeftLeg02",
             "Status": "100",
-            "Slot": "LEFT_LEG"
-        }
-    ],
-    "RightLeg": [
-        {
-            "Id": "leg00",
-            "Name": "RightLeg00",
-            "Status": "100",
-            "Slot": "RIGHT_LEG"
-        },
-        {
-            "Id": "leg01",
-            "Name": "RightLeg01",
-            "Status": "100",
-            "Slot": "RIGHT_LEG"
-        },
-        {
-            "Id": "leg02",
-            "Name": "RightLeg02",
-            "Status": "100",
-            "Slot": "RIGHT_LEG"
+            "Type": "Leg"
         }
     ]
 }

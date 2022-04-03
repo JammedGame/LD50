@@ -1,22 +1,20 @@
-export { Part, PartSlot, PartSlotValues }
+export { Part, PartType, PartTypeValues }
 
 const UNNAMED = "Unnamed";
 
-enum PartSlot
+enum PartType
 {
-    Head = "HEAD",
-    Torso = "TORSO",
-    LeftArm = "LEFT_ARM",
-    RightArm = "RIGHT_ARM",
-    LeftLeg = "LEFT_LEG",
-    RightLeg = "RIGHT_LEG"
+    Head = "Head",
+    Torso = "Torso",
+    Arm = "Arm",
+    Leg = "Leg"
 }
 
-function PartSlotValues(): string[] {
+function PartTypeValues(): string[] {
     let Values = [];
-    for (let Value in PartSlot) {
+    for (let Value in PartType) {
         if (isNaN(Number(Value))) {
-            Values.push(PartSlot[Value]);
+            Values.push(PartType[Value]);
         }
     }
     return Values;
@@ -27,22 +25,22 @@ class Part
     public Id: string;
     public Name: string;
     public Status: number;
-    public Slot: PartSlot;
-    public constructor(Old?: Part, Slot?: PartSlot)
+    public Type: PartType;
+    public constructor(Old?: Part, Type?: PartType)
     {
         if(Old)
         {
             this.Id = Old.Id;
             this.Name = Old.Name;
             this.Status = Old.Status;
-            this.Slot = Old.Slot;
+            this.Type = Old.Type;
         }
         else
         {
             this.Id = UNNAMED;
             this.Name = UNNAMED;
             this.Status = 100;
-            this.Slot = Slot || PartSlot.Head;
+            this.Type = Type || PartType.Head;
         }
     }
     public Copy(): Part

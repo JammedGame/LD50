@@ -1,43 +1,67 @@
-export { Robot }
+export { Robot, SlotType, SlotTypeValues, SlotTypeToPartType }
 
-import { Part, PartSlot, PartSlotValues } from "./Part";
+import { Part, PartType, PartTypeValues } from "./Part";
 
 const UNNAMED = "Unnamed";
 
-class Robot {
-    public Name: string;
-    public Parts: { [key: string]: Part }
-    public get PartsArray(): Part[] {
-        return Object.values(this.Parts);
+enum SlotType
+{
+    Head = "Head",
+    Torso = "Torso",
+    LeftArm = "LeftArm",
+    RightArm = "RightArm",
+    LeftLeg = "LeftLeg",
+    RightLeg = "RightLeg"
+}
+
+function SlotTypeValues(): string[] {
+    let Values = [];
+    for (let Value in SlotType) {
+        if (isNaN(Number(Value))) {
+            Values.push(SlotType[Value]);
+        }
     }
-    public constructor(Old?: Robot, Name?: string, Head?: Part, Torso?: Part, LeftArm?: Part, RightArm?: Part, LeftLeg?: Part, RightLeg?: Part) {
-        this.Parts = {};
-        if (Name) {
-            this.Name = Name;
-            this.Parts[PartSlot.Head] = Head;
-            this.Parts[PartSlot.Head].Slot = PartSlot.Head;
-            this.Parts[PartSlot.Torso] = Torso;
-            this.Parts[PartSlot.Torso].Slot = PartSlot.Torso;
-            this.Parts[PartSlot.LeftArm] = LeftArm;
-            this.Parts[PartSlot.LeftArm].Slot = PartSlot.LeftArm;
-            this.Parts[PartSlot.RightArm] = RightArm;
-            this.Parts[PartSlot.RightArm].Slot = PartSlot.RightArm;
-            this.Parts[PartSlot.LeftLeg] = LeftLeg;
-            this.Parts[PartSlot.LeftLeg].Slot = PartSlot.LeftLeg;
-            this.Parts[PartSlot.RightLeg] = RightLeg;
-            this.Parts[PartSlot.RightLeg].Slot = PartSlot.RightLeg;
+    return Values;
+}
+
+function SlotTypeToPartType(slotType: SlotType) {
+    if (slotType.includes('Leg')) return PartType.Leg;
+    if (slotType.includes('Arm')) return PartType.Arm;
+    return slotType as unknown as PartType;
+}
+
+interface IRobotData
+{
+    Name: string;
+    Parts: { [key: string]: Part };
+}
+
+class Robot
+{
+    public Name: string;
+    public Slots: { [key: string]: Part }
+    public get Parts(): Part[] {
+        return Object.values(this.Slots);
+    }
+    public constructor(Old?: Robot, Data?: IRobotData) {
+        this.Slots = {};
+        if (Data) {
+            this.Name = Data.Name;
+            SlotTypeValues().forEach((Type: SlotType) => {
+                this.Slots[Type] = Data.Parts[Type];
+            });
         }
         else if (Old) {
             this.Name = Old.Name;
-            Old.PartsArray.forEach((P: Part) => {
-                this.Parts[P.Slot] = P.Copy();
+            SlotTypeValues().forEach((Type: SlotType) => {
+                this.Slots[Type] = Old.Slots[Type];
             });
         }
         else {
             this.Name = UNNAMED;
-            PartSlotValues().forEach(PartSlotValue => {
-                this.Parts[PartSlotValue] = new Part();
-                this.Parts[PartSlotValue].Slot = PartSlotValue as PartSlot;
+            SlotTypeValues().forEach((Type: SlotType) => {
+                this.Slots[Type] = new Part();
+                this.Slots[Type].Type = SlotTypeToPartType(Type);
             });
         }
     }

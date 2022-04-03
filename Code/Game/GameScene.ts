@@ -4,14 +4,14 @@ import * as TBX from "toybox-engine";
 
 import Settings from "../Settings";
 import { RobotGen } from "./Data/RobotGen";
-import { PartDraw } from "./RobotDraw/PartDraw";
+import { SlotDraw } from "./RobotDraw/SlotDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
 
 class GameScene extends TBX.Scene2D
 {
     public static Current:GameScene;
     private _Robot: RobotDraw;
-    private _HoveredPart?: PartDraw;
+    private _HoveredSlot?: SlotDraw;
     private _BackButton: TBX.UI.Button;
     public constructor(Old?:GameScene)
     {
@@ -49,25 +49,25 @@ class GameScene extends TBX.Scene2D
     public MouseMove(Game: TBX.Game, Args: any): void
     {
         const SceneObject = TBX.Runner.Current.PickSceneObject(Args.UnscaledLocation);
-        if(SceneObject && SceneObject instanceof PartDraw)
+        if(SceneObject && SceneObject instanceof SlotDraw)
         {
-            const PickedPart = SceneObject as unknown as PartDraw;
-            if (PickedPart != this._HoveredPart)
+            const PickedPart = SceneObject as unknown as SlotDraw;
+            if (PickedPart != this._HoveredSlot)
             {
-                if (this._HoveredPart)
+                if (this._HoveredSlot)
                 {
-                    this._HoveredPart.SetHovered(false);
+                    this._HoveredSlot.SetHovered(false);
                 }
-                this._HoveredPart = PickedPart;
-                this._HoveredPart.SetHovered(true);
+                this._HoveredSlot = PickedPart;
+                this._HoveredSlot.SetHovered(true);
             }
         }
         else
         {
-            if (this._HoveredPart)
+            if (this._HoveredSlot)
             {
-                this._HoveredPart.SetHovered(false);
-                this._HoveredPart = undefined;
+                this._HoveredSlot.SetHovered(false);
+                this._HoveredSlot = undefined;
             }
         }
     }
