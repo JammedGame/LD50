@@ -9,6 +9,9 @@ import { RobotDraw } from "./RobotDraw/RobotDraw";
 import { PartGen } from "./Data/PartGen";
 import { SlotType } from "./RobotLogic/Robot";
 import { ResourceType } from "./RobotLogic/ResourceType";
+import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
+import { InventoryIcon } from "./Interface/Inventory/InventoryIcon";
+import { InterfaceFactory } from "./Interface/InterfaceFactory";
 
 class GameScene extends TBX.Scene2D
 {
@@ -16,6 +19,7 @@ class GameScene extends TBX.Scene2D
     private _Robot: RobotDraw;
     private _HoveredSlot?: SlotDraw;
     private _BackButton: TBX.UI.Button;
+    private _Inventory: InventoryPanel;
     public constructor(Old?:GameScene)
     {
         super(Old);
@@ -29,19 +33,20 @@ class GameScene extends TBX.Scene2D
             GameScene.Current = this;
         }
     }
-    private InitGameScene() : void
+    private InitGameScene(): void
     {
         this.Name = "Game";
         this.CreateBackground("Paper");
         this._Robot = new RobotDraw();
-        // this._Robot.ApplyData(RobotGen.randomRobot());
-        this._Robot.ApplyData(RobotGen.generateSet(5));
+        this._Robot.ApplyData(RobotGen.randomRobot());
+        //this._Robot.ApplyData(RobotGen.generateSet(3));
         this._Robot.SetPosition(new TBX.Vertex(960, 540));
         this.Events.MouseMove.push(this.MouseMove.bind(this));
         this.Attach(this._Robot);
         this._BackButton = this.CreateButton("Menu", TBX.UI.DockType.BottomLeft, new TBX.Vertex(50,50,0));
         this._BackButton.Events.Click.push(this.GoBack.bind(this));
-        console.log("part", PartGen.generatePart(SlotType.Head, ResourceType.GOLD));
+        this._Inventory = InterfaceFactory.GenerateInventory();
+        this.Attach(this._Inventory);
     }
     public Reset(): void
     {

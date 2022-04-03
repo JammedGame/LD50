@@ -32,7 +32,6 @@ class PartHoverDetails extends TBX.UI.Panel
         this.Size = new TBX.Vertex(180, 80);
         this.BackColor = TBX.Color.FromRGBA(255,255,255,200);
         this.Style.Values.flexDirection = "column";
-        this.Style.Values.flexDirection = "column";
         this.Style.Border.Color = Settings.ForeColor;
         this.Style.Border.Radius = 8;
         this.Style.Border.Width = 4;
