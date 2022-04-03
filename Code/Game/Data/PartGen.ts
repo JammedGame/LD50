@@ -27,7 +27,7 @@ class PartGen {
 
         console.log("primaryGold:", primaryGold)
         console.log("primaryGas:", primaryGas)
-        return;
+        return primaryGold;
     }
 
     public static generatePart(slotType: SlotType, primaryResource: ResourceType): Part {

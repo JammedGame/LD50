@@ -20,6 +20,7 @@ class GameScene extends TBX.Scene2D
     private _HoveredSlot?: SlotDraw;
     private _BackButton: TBX.UI.Button;
     private _Inventory: InventoryPanel;
+    private _Shop: InventoryPanel;
     public constructor(Old?:GameScene)
     {
         super(Old);
@@ -47,6 +48,8 @@ class GameScene extends TBX.Scene2D
         this._BackButton.Events.Click.push(this.GoBack.bind(this));
         this._Inventory = InterfaceFactory.GenerateInventory();
         this.Attach(this._Inventory);
+        this._Shop = InterfaceFactory.GenerateShop();
+        this.Attach(this._Shop);
     }
     public Reset(): void
     {
