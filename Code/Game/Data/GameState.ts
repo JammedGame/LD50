@@ -125,9 +125,6 @@ class ShopState
 		}
 
 		this.parts.splice(index, 1);
-
-		var newPart: PartGen.generatePart();
-
 		this.parts.push();
 		return true;
 	}
