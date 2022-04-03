@@ -40,7 +40,7 @@ class SlotDraw extends TBX.Tile
     public SetPositions(): void
     {
         switch(this.slotType) {
-            case SlotType.Head: this.SetPartPosition(new TBX.Vertex(0,-260,0)); break;
+            case SlotType.Head: this.SetPartPosition(new TBX.Vertex(0,-260,0.2)); break;
             case SlotType.Torso: this.SetPartPosition(new TBX.Vertex(0,0,0.1)); break;
             case SlotType.LeftArm: this.SetPartPosition(new TBX.Vertex(-185,5,0)); break;
             case SlotType.RightArm: this.SetPartPosition(new TBX.Vertex(185,5,0)); break;
