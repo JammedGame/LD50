@@ -68,6 +68,22 @@ class GameState
 		// update robot
 		this.currentRobot.Slots[slotType] = newPart;
 	}
+
+	public SendRobotToMission(mission: SingleMissionState): void
+	{
+		let amount1 = this.currentRobot.GetGatherAmount(mission.resource1);
+		this.resources.Give(mission.resource1, amount1);
+
+		let amount2 = this.currentRobot.GetGatherAmount(mission.resource2);
+		this.resources.Give(mission.resource2, amount2);
+
+		this.missions.GenerateNewMissions();
+
+		// todo: damage robot items
+		// todo: queue logic, get new robot
+		// todo: lose survival resources over time
+
+	}
 }
 
 class ResourceStorage
@@ -185,10 +201,10 @@ class ActiveMissionsState
 
 	public constructor()
 	{
-		this.GenerateMissions();
+		this.GenerateNewMissions();
 	}
 
-	public GenerateMissions(): void
+	public GenerateNewMissions(): void
 	{
 		this.missions = [];
 		this.missions.push(new SingleMissionState(ResourceType.Gas, ResourceType.Lithium));
