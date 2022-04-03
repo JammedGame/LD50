@@ -56,7 +56,7 @@ class GameState
 		var currentPart: Part = this.currentRobot.Slots[slotType];
 		if (currentPart == newPart)
 		{
-			console.log(`Tried to set part that's already here: ${newPart}`);
+			console.info(`Tried to set part that's already here: ${newPart}`);
 			return;
 		}
 

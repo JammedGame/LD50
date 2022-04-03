@@ -6,6 +6,8 @@ import Settings from "../../../Settings";
 import { Part } from "../../RobotLogic/Part";
 import { InventoryIcon } from "./InventoryIcon";
 
+const MAX_ITEMS = 100;
+
 class InventoryPanel extends TBX.UI.Panel {
 
     public parts: Part[];
@@ -32,21 +34,27 @@ class InventoryPanel extends TBX.UI.Panel {
         this.Style.Border.Color = Settings.ForeColor;
         this.Style.Border.Radius = 8;
         this.Style.Border.Width = 4;
+        // Hotfix
+        for (let i = 0; i < 100; i++) {
+            const icon = new InventoryIcon();
+            this.icons.push(icon);
+            this.Attach(icon);
+        }
     }
 
     public ApplyData(parts: Part[]): void {
         this.parts = parts;
         this.RenderIcons();
+        this.Update();
     }
 
     private RenderIcons(): void {
-        this.RemoveAll();
-        this.icons = [];
-        this.parts.forEach(part => {
-            const icon = new InventoryIcon(part);
-            this.icons.push(icon);
-            this.Attach(icon);
+        // Hotfix
+        for (let i = 0; i < 100; i++) {
+            this.icons[i].ApplyData(undefined);
+        }
+        this.parts.forEach((part, i) => {
+            this.icons[i].ApplyData(part);
         });
-        this.Update();
     }
 }

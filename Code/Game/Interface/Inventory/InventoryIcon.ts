@@ -6,17 +6,20 @@ import Settings from "../../../Settings";
 import { Part } from "../../RobotLogic/Part";
 
 class InventoryIcon extends TBX.UI.Panel {
+
     public part: Part;
     public icon: TBX.UI.Panel;
     public label: TBX.UI.Label;
+
     public get iconUrl(): string {
         return this.part.Type + "/" + this.part.Id;
     }
-    public constructor(part: Part) {
+
+    public constructor() {
         super();
-        this.part = part;
         this.Init();
     }
+
     public Init(): void {
         this.Name = "InventoryIcon";
         this.Size = new TBX.Vertex(150, 200);
@@ -29,7 +32,18 @@ class InventoryIcon extends TBX.UI.Panel {
         this.Attach(this.label);
     }
 
-    public CreateIcon(): TBX.UI.Panel {
+    public ApplyData(part?: Part): void {
+        if (part) {
+            this.Active = true;
+            this.part = part;
+            this.label.Text = this.part.Name;
+            this.icon.Style.Background.Image = 'url("' + Settings.ResourcesRoot + Settings.PartsRoot + this.iconUrl + '.png")';
+        } else {
+            this.Active = false;
+        }
+    }
+
+    private CreateIcon(): TBX.UI.Panel {
         const icon = new TBX.UI.Panel();
         icon.Style.Margin.All = 0;
         icon.Style.Border.Radius = 8;
@@ -39,13 +53,11 @@ class InventoryIcon extends TBX.UI.Panel {
         icon.Style.Border.Width = 4;
         icon.Style.Border.Color = Settings.ForeColor;
         icon.Style.Values.position = "static";
-        icon.Style.Background.Image = 'url("' + Settings.ResourcesRoot + Settings.PartsRoot + this.iconUrl + '.png")';
         return icon;
     }
 
-    public CreateLabel(): TBX.UI.Label {
+    private CreateLabel(): TBX.UI.Label {
         const label = new TBX.UI.Label();
-        label.Text = this.part.Name;
         label.Dock = TBX.UI.DockType.None;
         label.Style.Values.position = "static";
         label.Size = new TBX.Vertex(150, 30);
