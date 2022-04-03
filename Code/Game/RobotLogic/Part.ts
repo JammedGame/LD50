@@ -31,7 +31,7 @@ class Part
     public Type: PartType;
     public PrimaryResource: ResourceType;
     public SecondaryResource: ResourceType;
-    public TeritallyResource: ResourceType;
+    public TeritaryResource: ResourceType;
 
     public constructor(Old?: Part, Type?: PartType)
     {
@@ -80,5 +80,44 @@ class Part
             case PartType.Torso: return slotType == SlotType.Torso;
             default: return false;
         }
+    }
+
+    public GetGatherAmount(resourceType: ResourceType): number {
+        if (resourceType == this.PrimaryResource) return this.GetPrimaryGatherAmount();
+        if (resourceType == this.SecondaryResource) return this.GetSecondaryGatherAmount();
+        if (resourceType == this.TeritaryResource) return this.GetSecondaryGatherAmount();
+        return 0;
+    }
+
+    public GetPrimaryGatherAmount(): number {
+        if (this.Status >= 100) return 5;
+        if (this.Status >= 80) return 5;
+        if (this.Status >= 60) return 4;
+        if (this.Status >= 40) return 3;
+        if (this.Status > 0) return 1;
+        return 0;
+    }
+
+    public GetSecondaryGatherAmount(): number {
+        if (this.TeritaryResource == this.SecondaryResource || this.TeritaryResource == undefined || this.TeritaryResource == null)
+        {
+            // table type 1 (has only secondary resource)
+            if (this.Status >= 100) return 3;
+            if (this.Status >= 80) return 2;
+            if (this.Status >= 60) return 2;
+            if (this.Status >= 40) return 1;
+            if (this.Status > 0) return 1;
+        }
+        else
+        {
+            // table type 2 (has both secondary and tertiary resource)
+            if (this.Status >= 100) return 2;
+            if (this.Status >= 80) return 2;
+            if (this.Status >= 60) return 2;
+            if (this.Status >= 40) return 1;
+            if (this.Status > 0) return 1;
+        }
+
+        return 0;
     }
 }

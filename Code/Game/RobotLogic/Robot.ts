@@ -1,6 +1,7 @@
 export { Robot, SlotType, SlotTypeValues, SlotTypeToPartType }
 
 import { Part, PartType, PartTypeValues } from "./Part";
+import { ResourceType } from "./ResourceType";
 
 const UNNAMED = "Unnamed";
 
@@ -69,5 +70,17 @@ class Robot {
 
     public Copy(): Robot {
         return new Robot(this);
+    }
+
+    public GetGatherAmount(resourceType: ResourceType) : number
+    {
+        var amount: number = 0;
+
+        this.Parts.forEach(x =>
+        {
+            amount += x.GetGatherAmount(resourceType);
+        });
+
+        return amount;
     }
 }
