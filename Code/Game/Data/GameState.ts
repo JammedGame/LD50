@@ -1,3 +1,4 @@
+import { Random } from "toybox-engine";
 import { Part } from "../RobotLogic/Part";
 import { ResourceType } from "../RobotLogic/ResourceType";
 import { Robot, SlotType } from "../RobotLogic/Robot";
@@ -207,9 +208,21 @@ class ActiveMissionsState
 	public GenerateNewMissions(): void
 	{
 		this.missions = [];
-		this.missions.push(new SingleMissionState(ResourceType.Gas, ResourceType.Lithium));
-		this.missions.push(new SingleMissionState(ResourceType.Gas, ResourceType.Lithium));
-		this.missions.push(new SingleMissionState(ResourceType.Gas, ResourceType.Lithium));
+
+		let resourceTypesPool: ResourceType[] = [ResourceType.Oil, ResourceType.Lithium, ResourceType.Platina, ResourceType.Plutonium, ResourceType.Gas, ResourceType.Iron];
+
+		while(resourceTypesPool.length > 0)
+		{
+			let resource1Index = Random.Next(0, resourceTypesPool.length - 1);
+			let resource1 = resourceTypesPool[resource1Index];
+			resourceTypesPool.splice(resource1Index, 1);
+
+			let resource2Index = Random.Next(0, resourceTypesPool.length - 1);
+			let resource2 = resourceTypesPool[resource2Index];
+			resourceTypesPool.splice(resource2Index, 1);
+
+			this.missions.push(new SingleMissionState(resource1, resource2));
+		}
 	}
 }
 
@@ -220,6 +233,11 @@ class SingleMissionState
 
 	public constructor(resource1: ResourceType, resource2: ResourceType)
 	{
+		if (resource1 == undefined || resource2 == undefined)
+		{
+			console.error(`Invalid resource types in Mission constructor!`);
+		}
+
 		this.resource1 = resource1;
 		this.resource2 = resource2;
 	}
