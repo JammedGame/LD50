@@ -2,6 +2,7 @@ import { Part } from "../RobotLogic/Part";
 import { ResourceType } from "../RobotLogic/ResourceType";
 import { Robot } from "../RobotLogic/Robot";
 import { PartGen } from "./PartGen";
+import { RobotGen } from "./RobotGen";
 
 export { GameState }
 
@@ -17,7 +18,7 @@ class GameState
 	{
 		this.shop = new ShopState();
 		this.resources = new ResourceStorage();
-		this.currentRobot = new Robot();
+		this.currentRobot = RobotGen.randomRobot();
 		this.inventory = new InventoryState();
 		this.missions = new ActiveMissionsState();
 	}
@@ -97,7 +98,7 @@ class InventoryState
 			return true;
 		}
 
-		console.log('Failed to find part in inventory: ${part}');
+		console.info('Failed to find part in inventory: ${part}');
 		return false;
 	}
 

@@ -4,12 +4,11 @@ import * as TBX from "toybox-engine";
 
 import Settings from "../Settings";
 import { RobotGen } from "./Data/RobotGen";
+import { GameState } from "./Data/GameState";
 import { SlotDraw } from "./RobotDraw/SlotDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
-import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
-import { InventoryIcon } from "./Interface/Inventory/InventoryIcon";
 import { InterfaceFactory } from "./Interface/InterfaceFactory";
-import { GameState } from "./Data/GameState";
+import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 
 class GameScene extends TBX.Scene2D
 {
@@ -38,24 +37,31 @@ class GameScene extends TBX.Scene2D
 
         this.Name = "Game";
         this.CreateBackground("Paper");
-        this._Robot = new RobotDraw();
-        this._Robot.ApplyData(RobotGen.randomRobot());
-        // this._Robot.ApplyData(RobotGen.generateSet(3));
-        this._Robot.SetPosition(new TBX.Vertex(960, 540));
         this.Events.MouseUp.push(this.MouseUp.bind(this));
         this.Events.MouseDown.push(this.MouseDown.bind(this));
         this.Events.MouseMove.push(this.MouseMove.bind(this));
-        this.Attach(this._Robot);
         this._BackButton = this.CreateButton("Menu", TBX.UI.DockType.BottomLeft, new TBX.Vertex(50, 50, 0));
         this._BackButton.Events.Click.push(this.GoBack.bind(this));
-        this._Inventory = InterfaceFactory.GenerateInventory();
+        this._Robot = new RobotDraw();
+        this._Robot.SetPosition(new TBX.Vertex(960, 540));
+        this._Inventory = new InventoryPanel(TBX.UI.DockType.Left);
+        this._Shop = new InventoryPanel(TBX.UI.DockType.Right);
+        this.Attach(this._Robot);
         this.Attach(this._Inventory);
-        this._Shop = InterfaceFactory.GenerateShop();
         this.Attach(this._Shop);
+        this.ApplyState();
     }
 
     public Reset(): void {
+        this.gameState = new GameState();
+        this.ApplyState();
+    }
 
+    public ApplyState(): void {
+        console.log(this.gameState.currentRobot);
+        this._Robot.ApplyData(this.gameState.currentRobot);
+        this._Inventory.ApplyData(this.gameState.inventory.parts);
+        this._Shop.ApplyData(this.gameState.shop.parts);
     }
 
     public GoBack(): void {
