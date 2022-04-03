@@ -106,10 +106,10 @@ class GameScene extends TBX.Scene2D
     public MouseUp(Game: TBX.Game, Args: any): void {
         if (this._PickedUpSlot) {
             if (Args.UnscaledLocation.X < 400) {
-                // Put to inventory
+                this.gameState.inventory.Add(this._PickedUpSlot.RData);
                 this.Remove(this._PickedUpSlot);
                 this._PickedUpSlot = undefined;
-                console.info('inventory');
+                this._Inventory.ApplyData(this.gameState.inventory.parts);
             } else if (Args.UnscaledLocation.X > 1520) {
                 // Sell to shop
                 this.Remove(this._PickedUpSlot);

@@ -32,7 +32,6 @@ class InventoryPanel extends TBX.UI.Panel {
         this.Style.Border.Color = Settings.ForeColor;
         this.Style.Border.Radius = 8;
         this.Style.Border.Width = 4;
-        this.Update();
     }
 
     public ApplyData(parts: Part[]): void {
@@ -41,16 +40,13 @@ class InventoryPanel extends TBX.UI.Panel {
     }
 
     private RenderIcons(): void {
-        if (this.icons.length > 0) {
-            this.icons.forEach(icon => {
-                this.Remove(icon);
-            });
-        }
+        this.RemoveAll();
         this.icons = [];
         this.parts.forEach(part => {
             const icon = new InventoryIcon(part);
             this.icons.push(icon);
             this.Attach(icon);
         });
+        this.Update();
     }
 }

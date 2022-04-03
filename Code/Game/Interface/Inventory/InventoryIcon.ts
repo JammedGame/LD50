@@ -23,30 +23,36 @@ class InventoryIcon extends TBX.UI.Panel {
         this.BackColor = TBX.Color.Empty;
         this.Style.Values.position = "relative";
         this.Style.Values.flexDirection = "column";
-        this.icon = new TBX.UI.Panel();
-        this.icon.Style.Margin.All = 0;
-        this.icon.Style.Border.Radius = 8;
-        this.icon.Size = new TBX.Vertex(150, 150);
-        this.icon.Style.Background.Image = 'url("' + Settings.ResourcesRoot + Settings.PartsRoot + this.iconUrl + '.png")';
-        this.icon.Style.Values.backgroundSize = "cover";
-        this.icon.Style.Border.Radius = 8;
-        this.icon.Style.Border.Width = 4;
-        this.icon.Style.Border.Color = Settings.ForeColor;
-        this.icon.Style.Values.position = "static";
+        this.icon = this.CreateIcon();
+        this.label = this.CreateLabel();
         this.Attach(this.icon);
-        if (Text) {
-            this.label = new TBX.UI.Label();
-            this.label.Text = this.part.Name;
-            this.label.Dock = TBX.UI.DockType.None;
-            this.label.Style.Values.position = "static";
-            this.label.Size = new TBX.Vertex(150, 30);
-            this.label.Style.Text.Size = 20;
-            this.label.Style.Text.Weight = 700;
-            this.label.Style.Values.textTransform = "uppercase";
-            this.label.ForeColor = Settings.ForeColor;
-            this.label.Update();
-            this.Attach(this.label);
-        }
-        this.Update();
+        this.Attach(this.label);
+    }
+
+    public CreateIcon(): TBX.UI.Panel {
+        const icon = new TBX.UI.Panel();
+        icon.Style.Margin.All = 0;
+        icon.Style.Border.Radius = 8;
+        icon.Size = new TBX.Vertex(150, 150);
+        icon.Style.Values.backgroundSize = "cover";
+        icon.Style.Border.Radius = 8;
+        icon.Style.Border.Width = 4;
+        icon.Style.Border.Color = Settings.ForeColor;
+        icon.Style.Values.position = "static";
+        icon.Style.Background.Image = 'url("' + Settings.ResourcesRoot + Settings.PartsRoot + this.iconUrl + '.png")';
+        return icon;
+    }
+
+    public CreateLabel(): TBX.UI.Label {
+        const label = new TBX.UI.Label();
+        label.Text = this.part.Name;
+        label.Dock = TBX.UI.DockType.None;
+        label.Style.Values.position = "static";
+        label.Size = new TBX.Vertex(150, 30);
+        label.Style.Text.Size = 20;
+        label.Style.Text.Weight = 700;
+        label.Style.Values.textTransform = "uppercase";
+        label.ForeColor = Settings.ForeColor;
+        return label;
     }
 }
