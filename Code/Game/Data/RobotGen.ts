@@ -20,6 +20,21 @@ class RobotGen {
         });
         return new Robot(null, RobotData);
     }
+
+    public static generateSet(setIndex: number): Robot {
+        let partSet: PartSet = parsePartSet();
+        let RobotData = {
+            Name: 'Set'+setIndex,
+            Parts: {}
+        }
+        
+        SlotTypeValues().forEach(slotType => {
+            const partType = SlotTypeToPartType(slotType as SlotType);
+            RobotData.Parts[slotType]
+                = partSet[partType][setIndex]
+        });
+        return new Robot(null, RobotData);
+    }
 }
 
 function parsePartSet(): PartSet {

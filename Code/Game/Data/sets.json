@@ -17,6 +17,12 @@
             "Name": "head02",
             "Status": "100",
             "Type": "Head"
+        },
+        {
+            "Id": "head03",
+            "Name": "head03",
+            "Status": "100",
+            "Type": "Head"
         }
     ],
     "Torso": [
@@ -35,6 +41,12 @@
         {
             "Id": "torso02",
             "Name": "Torso02",
+            "Status": "100",
+            "Type": "Torso"
+        },
+        {
+            "Id": "torso03",
+            "Name": "Torso03",
             "Status": "100",
             "Type": "Torso"
         }
@@ -57,6 +69,12 @@
             "Name": "LeftArm02",
             "Status": "100",
             "Type": "Arm"
+        },
+        {
+            "Id": "arm03",
+            "Name": "LeftArm03",
+            "Status": "100",
+            "Type": "Arm"
         }
     ],
     "Leg": [
@@ -75,6 +93,12 @@
         {
             "Id": "leg02",
             "Name": "LeftLeg02",
+            "Status": "100",
+            "Type": "Leg"
+        },
+        {
+            "Id": "leg03",
+            "Name": "LeftLeg03",
             "Status": "100",
             "Type": "Leg"
         }
