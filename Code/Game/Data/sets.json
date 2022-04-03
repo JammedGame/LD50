@@ -41,6 +41,13 @@
             "Status": "100",
             "Type": "Head",
             "PrimaryResource": "iron"
+        },
+        {
+            "Id": "head06",
+            "Name": "head06",
+            "Status": "100",
+            "Type": "Head",
+            "PrimaryResource": "lithium"
         }
     ],
     "Torso": [
@@ -85,6 +92,13 @@
             "Status": "100",
             "Type": "Torso",
             "PrimaryResource": "iron"
+        },
+        {
+            "Id": "torso06",
+            "Name": "Torso06",
+            "Status": "100",
+            "Type": "Torso",
+            "PrimaryResource": "lithium"
         }
     ],
     "Arm": [
@@ -129,6 +143,13 @@
             "Status": "100",
             "Type": "Arm",
             "PrimaryResource": "iron"
+        },
+        {
+            "Id": "arm06",
+            "Name": "LeftArm06",
+            "Status": "100",
+            "Type": "Arm",
+            "PrimaryResource": "lithium"
         }
     ],
     "Leg": [
@@ -173,6 +194,13 @@
             "Status": "100",
             "Type": "Leg",
             "PrimaryResource": "iron"
+        },
+        {
+            "Id": "leg06",
+            "Name": "LeftLeg06",
+            "Status": "100",
+            "Type": "Leg",
+            "PrimaryResource": "lithium"
         }
     ]
 }

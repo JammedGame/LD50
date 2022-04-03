@@ -3,11 +3,9 @@ export { GameScene };
 import * as TBX from "toybox-engine";
 
 import Settings from "../Settings";
-import { RobotGen } from "./Data/RobotGen";
 import { GameState } from "./Data/GameState";
 import { SlotDraw } from "./RobotDraw/SlotDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
-import { InterfaceFactory } from "./Interface/InterfaceFactory";
 import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 
 class GameScene extends TBX.Scene2D
@@ -58,7 +56,6 @@ class GameScene extends TBX.Scene2D
     }
 
     public ApplyState(): void {
-        console.log(this.gameState.currentRobot);
         this._Robot.ApplyData(this.gameState.currentRobot);
         this._Inventory.ApplyData(this.gameState.inventory.parts);
         this._Shop.ApplyData(this.gameState.shop.parts);
