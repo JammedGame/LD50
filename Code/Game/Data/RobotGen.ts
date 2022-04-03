@@ -25,4 +25,3 @@ class RobotGen {
 function parsePartSet(): PartSet {
     return Object.assign(new PartSet, data)
 }
-

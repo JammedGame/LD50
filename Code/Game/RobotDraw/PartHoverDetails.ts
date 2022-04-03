@@ -23,12 +23,12 @@ class PartHoverDetails extends TBX.UI.Panel
     }
     public SetPosition(Offset: TBX.Vertex): void
     {
-        this.Position = Offset.Copy().Add(new TBX.Vertex(-90,130,0));
+        this.Position = Offset.Copy().Add(new TBX.Vertex(-960,130,0));
     }
     public Init(): void
     {
         this.Active = false;
-        this.Style.Layout.Dock = TBX.UI.DockType.TopLeft;
+        this.Style.Layout.Dock = TBX.UI.DockType.Top;
         this.Size = new TBX.Vertex(180, 80);
         this.BackColor = TBX.Color.FromRGBA(255,255,255,200);
         this.Style.Values.flexDirection = "column";
@@ -41,8 +41,8 @@ class PartHoverDetails extends TBX.UI.Panel
         this.SlotLabel.Style.Values.textTransform = "uppercase";
         this.SlotLabel.ForeColor = Settings.ForeColor2;
         this.SlotLabel.Dock = TBX.UI.DockType.None;
-        this.SlotLabel.Style.Margin.Top = -10;
-        this.SlotLabel.Style.Margin.Bottom = -10;
+        this.SlotLabel.Style.Margin.Top = -15;
+        this.SlotLabel.Style.Margin.Bottom = -30;
         this.Attach(this.SlotLabel);
         this.StatusLabel = new TBX.UI.Label();
         this.StatusLabel.Style.Text.Size = 32;
