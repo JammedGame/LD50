@@ -1,4 +1,5 @@
 import {ResourceType} from './ResourceType'
+import { SlotType } from './Robot';
 
 export { Part, PartType, PartTypeValues }
 
@@ -57,7 +58,7 @@ class Part
     }
 
     public GetBuyPrice(): number {
-        return 50; // fixed!
+        return 50; // const
     }
 
     public GetSellingPrice(): number {
@@ -67,5 +68,17 @@ class Part
         if (this.Status >= 40) return 10;
         if (this.Status > 0) return 5;
         return 1;
-	}
+    }
+
+    public IsAssignableToSlot(slotType: SlotType)
+    {
+        switch (this.Type)
+        {
+            case PartType.Arm: return slotType == SlotType.LeftArm || slotType == SlotType.RightArm;
+            case PartType.Leg: return slotType == SlotType.LeftLeg || slotType == SlotType.RightLeg;
+            case PartType.Head: return slotType == SlotType.Head;
+            case PartType.Torso: return slotType == SlotType.Torso;
+            default: return false;
+        }
+    }
 }

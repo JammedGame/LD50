@@ -25,8 +25,9 @@ class GameState
 
 	public BuyPartFromShop(part: Part, slotType: SlotType)
 	{
-		if (this.resources.CanAfford(ResourceType.Iron, part.GetBuyPrice()) && this.shop.BuyPart(part))
+		if (this.resources.CanAfford(ResourceType.Iron, part.GetBuyPrice()) && part.IsAssignableToSlot(slotType))
 		{
+			this.shop.BuyPart(part);
 			this.resources.Spend(ResourceType.Iron, part.GetBuyPrice());
 			this.PutPartIntoRobot(slotType, part);
 		}
@@ -34,7 +35,7 @@ class GameState
 
 	public SwapPartFromInventory(part: Part, slotType: SlotType)
 	{
-		if (this.inventory.Remove(part))
+		if (part.IsAssignableToSlot(slotType) && this.inventory.Remove(part))
 		{
 			this.PutPartIntoRobot(slotType, part);
 		}
