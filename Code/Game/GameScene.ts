@@ -6,9 +6,7 @@ import Settings from "../Settings";
 import { RobotGen } from "./Data/RobotGen";
 import { SlotDraw } from "./RobotDraw/SlotDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
-import { PartGen } from "./Data/PartGen";
-import { SlotType } from "./RobotLogic/Robot";
-import { ResourceType } from "./RobotLogic/ResourceType";
+import { InterfaceFactory } from "./Interface/InterfaceFactory";
 import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 import { InventoryIcon } from "./Interface/Inventory/InventoryIcon";
 import { InterfaceFactory } from "./Interface/InterfaceFactory";
@@ -20,18 +18,17 @@ class GameScene extends TBX.Scene2D
     public gameState: GameState;
     private _Robot: RobotDraw;
     private _HoveredSlot?: SlotDraw;
+    private _PickedUpSlot?: SlotDraw;
     private _BackButton: TBX.UI.Button;
     private _Inventory: InventoryPanel;
     private _Shop: InventoryPanel;
-    public constructor(Old?:GameScene)
-    {
+
+    public constructor(Old?: GameScene) {
         super(Old);
-        if(Old)
-        {
+        if (Old) {
             //TODO
         }
-        else
-        {
+        else {
             this.InitGameScene();
             GameScene.Current = this;
         }
@@ -44,59 +41,94 @@ class GameScene extends TBX.Scene2D
         this.CreateBackground("Paper");
         this._Robot = new RobotDraw();
         this._Robot.ApplyData(RobotGen.randomRobot());
-        //this._Robot.ApplyData(RobotGen.generateSet(3));
+        // this._Robot.ApplyData(RobotGen.generateSet(3));
         this._Robot.SetPosition(new TBX.Vertex(960, 540));
+        this.Events.MouseUp.push(this.MouseUp.bind(this));
+        this.Events.MouseDown.push(this.MouseDown.bind(this));
         this.Events.MouseMove.push(this.MouseMove.bind(this));
         this.Attach(this._Robot);
-        this._BackButton = this.CreateButton("Menu", TBX.UI.DockType.BottomLeft, new TBX.Vertex(50,50,0));
+        this._BackButton = this.CreateButton("Menu", TBX.UI.DockType.BottomLeft, new TBX.Vertex(50, 50, 0));
         this._BackButton.Events.Click.push(this.GoBack.bind(this));
         this._Inventory = InterfaceFactory.GenerateInventory();
         this.Attach(this._Inventory);
         this._Shop = InterfaceFactory.GenerateShop();
         this.Attach(this._Shop);
     }
-    public Reset(): void
-    {
+
+    public Reset(): void {
 
     }
-    public GoBack(): void
-    {
+
+    public GoBack(): void {
         TBX.Runner.Current.SwitchScene("Menu");
     }
-    public MouseMove(Game: TBX.Game, Args: any): void
-    {
-        const SceneObject = TBX.Runner.Current.PickSceneObject(Args.UnscaledLocation);
-        if(SceneObject && SceneObject instanceof SlotDraw)
-        {
-            const PickedPart = SceneObject as unknown as SlotDraw;
-            if (PickedPart != this._HoveredSlot)
-            {
-                if (this._HoveredSlot)
-                {
-                    this._HoveredSlot.SetHovered(false);
-                }
-                this._HoveredSlot = PickedPart;
-                this._HoveredSlot.SetHovered(true);
-            }
-        }
-        else
-        {
-            if (this._HoveredSlot)
-            {
-                this._HoveredSlot.SetHovered(false);
-                this._HoveredSlot = undefined;
+
+    public MouseDown(Game: TBX.Game, Args: any): void {
+        if (!this._PickedUpSlot) {
+            const SceneObject = TBX.Runner.Current.PickSceneObject(Args.UnscaledLocation);
+            if (SceneObject && SceneObject instanceof SlotDraw) {
+                const PickedPart = SceneObject as unknown as SlotDraw;
+                this._PickedUpSlot = new SlotDraw(PickedPart);
+                this.Attach(this._PickedUpSlot);
             }
         }
     }
-    protected CreateBackground(Name:string) : void
-    {
-        let Back:TBX.Tile = TBX.SceneObjectUtil.CreateTile(Name, ["Resources/Textures/Backgrounds/"+Name+".png"], new TBX.Vertex(960,540), new TBX.Vertex(1920, 1080, 1));
+
+    public MouseMove(Game: TBX.Game, Args: any): void {
+        if (this._PickedUpSlot) {
+            this._PickedUpSlot.Position.X = Args.UnscaledLocation.X;
+            this._PickedUpSlot.Position.Y = Args.UnscaledLocation.Y;
+            this._PickedUpSlot.Position.Z = 1;
+        } else {
+            const SceneObject = TBX.Runner.Current.PickSceneObject(Args.UnscaledLocation);
+            if (SceneObject && SceneObject instanceof SlotDraw) {
+                const PickedPart = SceneObject as unknown as SlotDraw;
+                if (PickedPart != this._HoveredSlot) {
+                    if (this._HoveredSlot) {
+                        this._HoveredSlot.SetHovered(false);
+                    }
+                    this._HoveredSlot = PickedPart;
+                    this._HoveredSlot.SetHovered(true);
+                }
+            }
+            else {
+                if (this._HoveredSlot) {
+                    this._HoveredSlot.SetHovered(false);
+                    this._HoveredSlot = undefined;
+                }
+            }
+        }
+    }
+
+    public MouseUp(Game: TBX.Game, Args: any): void {
+        if (this._PickedUpSlot) {
+            if (Args.UnscaledLocation.X < 400) {
+                // Put to inventory
+                this.Remove(this._PickedUpSlot);
+                this._PickedUpSlot = undefined;
+                console.info('inventory');
+            } else if (Args.UnscaledLocation.X > 1520) {
+                // Sell to shop
+                this.Remove(this._PickedUpSlot);
+                this._PickedUpSlot = undefined;
+                console.info('sold');
+            } else {
+                // Return to slot
+                this.Remove(this._PickedUpSlot);
+                this._PickedUpSlot = undefined;
+                console.info('none');
+            }
+        }
+    }
+
+    protected CreateBackground(Name: string): void {
+        let Back: TBX.Tile = TBX.SceneObjectUtil.CreateTile(Name, ["Resources/Textures/Backgrounds/" + Name + ".png"], new TBX.Vertex(960, 540), new TBX.Vertex(1920, 1080, 1));
         Back.Fixed = true;
         this.Attach(Back);
     }
-    protected CreateButton(Text: string, Dock: TBX.UI.DockType, Position: TBX.Vertex) : TBX.UI.Button
-    {
-        let Button:TBX.UI.Button = new TBX.UI.Button(null, Text);
+
+    protected CreateButton(Text: string, Dock: TBX.UI.DockType, Position: TBX.Vertex): TBX.UI.Button {
+        let Button: TBX.UI.Button = new TBX.UI.Button(null, Text);
         Button.Name = Text;
         Button.Position = Position;
         Button.ForeColor = Settings.ForeColor;
@@ -109,12 +141,12 @@ class GameScene extends TBX.Scene2D
         this.Attach(Button);
         return Button;
     }
-    protected CreateLabel(Text:string) : TBX.UI.Label
-    {
-        let Label:TBX.UI.Label = new TBX.UI.Label(null, Text);
+
+    protected CreateLabel(Text: string): TBX.UI.Label {
+        let Label: TBX.UI.Label = new TBX.UI.Label(null, Text);
         Label.Size = new TBX.Vertex(800, 80);
         Label.Position = new TBX.Vertex(960, 100, 0.2);
-        Label.ForeColor = TBX.Color.FromRGBA(244,208,63,255);
+        Label.ForeColor = TBX.Color.FromRGBA(244, 208, 63, 255);
         Label.Style.Text.Size = 60;
         Label.Style.Border.Width = 0;
         this.Attach(Label);
