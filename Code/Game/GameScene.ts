@@ -6,7 +6,6 @@ import Settings from "../Settings";
 import { RobotGen } from "./Data/RobotGen";
 import { SlotDraw } from "./RobotDraw/SlotDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
-import { InterfaceFactory } from "./Interface/InterfaceFactory";
 import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 import { InventoryIcon } from "./Interface/Inventory/InventoryIcon";
 import { InterfaceFactory } from "./Interface/InterfaceFactory";
