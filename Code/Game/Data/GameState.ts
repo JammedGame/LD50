@@ -108,12 +108,16 @@ class ResourceStorage
 	constructor()
 	{
 		this.resources = [];
-		this.resources.push(new SingleResourceState(ResourceType.Oil, 100));
-		this.resources.push(new SingleResourceState(ResourceType.Lithium, 100));
-		this.resources.push(new SingleResourceState(ResourceType.Platina, 100));
-		this.resources.push(new SingleResourceState(ResourceType.Plutonium, 100));
-		this.resources.push(new SingleResourceState(ResourceType.Gas, 100));
-		this.resources.push(new SingleResourceState(ResourceType.Iron, 100));
+
+		let initialResourceValues: number[] = [20, 24, 28, 32, 36];
+
+		this.resources.push(new SingleResourceState(ResourceType.Oil, PopRandom(initialResourceValues)));
+		this.resources.push(new SingleResourceState(ResourceType.Lithium, PopRandom(initialResourceValues)));
+		this.resources.push(new SingleResourceState(ResourceType.Platina, PopRandom(initialResourceValues)));
+		this.resources.push(new SingleResourceState(ResourceType.Plutonium, PopRandom(initialResourceValues)));
+		this.resources.push(new SingleResourceState(ResourceType.Gas, PopRandom(initialResourceValues)));
+
+		this.resources.push(new SingleResourceState(ResourceType.Iron, 200));
 	}
 
 	private getResource(resourceType: ResourceType): SingleResourceState
@@ -255,4 +259,15 @@ class SingleMissionState
 		this.resource1 = resource1;
 		this.resource2 = resource2;
 	}
+}
+
+function PopRandom<T>(list: T[]): T
+{
+	if (list == null || list.length == 0)
+		return undefined;
+
+	let index = Random.Next(0, list.length - 1);
+	let value: T = list[index];
+	list.splice(index, 1);
+	return value;
 }
