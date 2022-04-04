@@ -69,6 +69,13 @@
             "Status": "100",
             "Type": "Head",
             "PrimaryResource": "gas"
+        },
+        {
+            "Id": "head10",
+            "Name": "head10",
+            "Status": "100",
+            "Type": "Head",
+            "PrimaryResource": "oil"
         }
     ],
     "Torso": [
@@ -141,6 +148,13 @@
             "Status": "100",
             "Type": "Torso",
             "PrimaryResource": "gas"
+        },
+        {
+            "Id": "torso10",
+            "Name": "Torso10",
+            "Status": "100",
+            "Type": "Torso",
+            "PrimaryResource": "oil"
         }
     ],
     "Arm": [
@@ -213,6 +227,13 @@
             "Status": "100",
             "Type": "Arm",
             "PrimaryResource": "gas"
+        },
+        {
+            "Id": "arm10",
+            "Name": "LeftArm10",
+            "Status": "100",
+            "Type": "Arm",
+            "PrimaryResource": "oil"
         }
     ],
     "Leg": [
@@ -285,6 +306,13 @@
             "Status": "100",
             "Type": "Leg",
             "PrimaryResource": "gas"
+        },
+        {
+            "Id": "leg10",
+            "Name": "LeftLeg10",
+            "Status": "100",
+            "Type": "Leg",
+            "PrimaryResource": "oil"
         }
     ]
 }
