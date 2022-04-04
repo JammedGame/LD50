@@ -1,3 +1,4 @@
+import { Random } from 'toybox-engine';
 import {ResourceType} from './ResourceType'
 import { SlotType } from './Robot';
 
@@ -120,4 +121,12 @@ class Part
 
         return 0;
     }
+
+    ApplyRandomDamage(): void {
+        this.Status -= Random.Next(10, 30);
+
+        // cap >0
+        if (this.Status < 0)
+            this.Status = 0;
+	}
 }

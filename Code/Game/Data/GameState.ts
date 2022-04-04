@@ -69,18 +69,35 @@ class GameState
 
 	public SendRobotToMission(mission: SingleMissionState): void
 	{
+		// gather resources
 		let amount1 = this.currentRobot.GetGatherAmount(mission.resource1);
 		this.resources.Give(mission.resource1, amount1);
 
 		let amount2 = this.currentRobot.GetGatherAmount(mission.resource2);
 		this.resources.Give(mission.resource2, amount2);
 
+		// regenerate missions
 		this.missions.GenerateNewMissions();
 
-		// todo: damage robot items
-		// todo: queue logic, get new robot
-		// todo: lose survival resources over time
+		// turn spend on survival
+		this.resources.Spend(ResourceType.Oil, 2);
+		this.resources.Spend(ResourceType.Lithium, 2);
+		this.resources.Spend(ResourceType.Platina, 2);
+		this.resources.Spend(ResourceType.Plutonium, 2);
+		this.resources.Spend(ResourceType.Gas, 2);
 
+		// damage robot
+		this.currentRobot.Parts.forEach(x => {
+			if (x.GetGatherAmount(mission.resource1) > 0 || x.GetGatherAmount(mission.resource2) > 0)
+			{
+				x.ApplyRandomDamage();
+			}
+		});
+
+		// get new robot
+		this.currentRobot = RobotGen.randomRobot();
+
+		// todo: queue logic, get new robot
 	}
 }
 
