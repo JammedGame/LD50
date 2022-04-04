@@ -5,7 +5,7 @@ import { Robot, SlotType } from "../RobotLogic/Robot";
 import { PartGen } from "./PartGen";
 import { RobotGen } from "./RobotGen";
 
-export { GameState, ResourceStorage }
+export { GameState, ResourceStorage, PopRandom }
 
 class GameState
 {
