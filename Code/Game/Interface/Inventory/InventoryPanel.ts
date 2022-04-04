@@ -3,6 +3,7 @@ export { InventoryPanel }
 import * as TBX from "toybox-engine";
 
 import Settings from "../../../Settings";
+import { PartHoverDetails } from "../../RobotDraw/PartHoverDetails";
 import { Part } from "../../RobotLogic/Part";
 import { InventoryIcon } from "./InventoryIcon";
 
@@ -12,6 +13,7 @@ class InventoryPanel extends TBX.UI.Panel {
 
     public parts: Part[];
     public icons: InventoryIcon[];
+    public details: PartHoverDetails;
     public Click: (part: Part) => void;
 
     public constructor(dock: TBX.UI.DockType) {
@@ -35,12 +37,32 @@ class InventoryPanel extends TBX.UI.Panel {
         this.Style.Border.Color = Settings.ForeColor;
         this.Style.Border.Radius = 8;
         this.Style.Border.Width = 4;
+        this.details = new PartHoverDetails();
+        this.details.Dock = dock;
+        this.details.Position = new TBX.Vertex(200, -255, 4);
+        this.details.Style.Values.position = "fixed";
+        this.Attach(this.details);
         // Hotfix
         for (let i = 0; i < 100; i++) {
             const icon = new InventoryIcon();
             icon.Click = this.OnClick.bind(this);
+            icon.MouseEnter = this.OnMouseEnter.bind(this);
+            icon.MouseLeave = this.OnMouseLeave.bind(this);
             this.icons.push(icon);
             this.Attach(icon);
+        }
+    }
+
+    public OnMouseEnter(part: Part): void {
+        this.details.ApplyData(part);
+        this.details.Active = true;
+        this.details.Update();
+    }
+
+    public OnMouseLeave(part: Part): void {
+        if (this.details.RData === part) {
+            this.details.Active = false;
+            this.Update();
         }
     }
 

@@ -7,9 +7,13 @@ import { Part } from "../../RobotLogic/Part";
 
 class InventoryIcon extends TBX.UI.Panel {
 
+    public dock: TBX.UI.DockType;
     public part: Part;
     public icon: TBX.UI.Panel;
     public label: TBX.UI.Label;
+    public MouseEnter: (part: Part) => void;
+    public MouseLeave: (part: Part) => void;
+    
     public Click: (part: Part) => void;
 
     public get iconUrl(): string {
@@ -30,6 +34,8 @@ class InventoryIcon extends TBX.UI.Panel {
         this.icon = this.CreateIcon();
         this.label = this.CreateLabel();
         this.Events.Click.push(this.OnClick.bind(this));
+        this.Events.MouseEnter.push(this.OnMouseEnter.bind(this));
+        this.Events.MouseLeave.push(this.OnMouseLeave.bind(this));
         this.Attach(this.icon);
         this.Attach(this.label);
     }
@@ -48,6 +54,18 @@ class InventoryIcon extends TBX.UI.Panel {
     public OnClick(): void {
         if (this.part && this.Click) {
             this.Click(this.part);
+        }
+    }
+
+    public OnMouseEnter(): void {
+        if (this.MouseEnter) {
+            this.MouseEnter(this.part);
+        }
+    }
+
+    public OnMouseLeave(part: Part): void {
+        if (this.MouseLeave) {
+            this.MouseLeave(this.part);
         }
     }
 

@@ -32,6 +32,10 @@ class ResourceEntry extends TBX.UI.Panel {
         this.Attach(this.label);
     }
 
+    public SetIcon(iconUrl: string): void {
+        this.icon.Style.Background.Image = 'url("' + Settings.ResourcesRoot + Settings.ResourceIconsRoot + iconUrl + '_icon.png")';
+    }
+
     public ApplyData(text: string): void {
         this.label.Text = text;
     }
