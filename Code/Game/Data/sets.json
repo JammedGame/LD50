@@ -62,6 +62,13 @@
             "Status": "100",
             "Type": "Head",
             "PrimaryResource": "platina"
+        },
+        {
+            "Id": "head09",
+            "Name": "head09",
+            "Status": "100",
+            "Type": "Head",
+            "PrimaryResource": "gas"
         }
     ],
     "Torso": [
@@ -127,6 +134,13 @@
             "Status": "100",
             "Type": "Torso",
             "PrimaryResource": "platina"
+        },
+        {
+            "Id": "torso09",
+            "Name": "Torso09",
+            "Status": "100",
+            "Type": "Torso",
+            "PrimaryResource": "gas"
         }
     ],
     "Arm": [
@@ -192,6 +206,13 @@
             "Status": "100",
             "Type": "Arm",
             "PrimaryResource": "platina"
+        },
+        {
+            "Id": "arm09",
+            "Name": "LeftArm09",
+            "Status": "100",
+            "Type": "Arm",
+            "PrimaryResource": "gas"
         }
     ],
     "Leg": [
@@ -257,6 +278,13 @@
             "Status": "100",
             "Type": "Leg",
             "PrimaryResource": "platina"
+        },
+        {
+            "Id": "leg09",
+            "Name": "LeftLeg09",
+            "Status": "100",
+            "Type": "Leg",
+            "PrimaryResource": "gas"
         }
     ]
 }
