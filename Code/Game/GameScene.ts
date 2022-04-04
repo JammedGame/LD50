@@ -9,6 +9,7 @@ import { SlotDraw } from "./RobotDraw/SlotDraw";
 import { RobotDraw } from "./RobotDraw/RobotDraw";
 import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 import { DraggedPart } from "./RobotDraw/DraggedPart";
+import { Part } from "./RobotLogic/Part";
 
 class GameScene extends TBX.Scene2D {
     public static Current: GameScene;
@@ -47,6 +48,7 @@ class GameScene extends TBX.Scene2D {
         this.Attach(this._Robot);
 
         this._Inventory = new InventoryPanel(TBX.UI.DockType.Left);
+        this._Inventory.Click = this.InventorySelect.bind(this);
         this.Attach(this._Inventory);
 
         this._Shop = new InventoryPanel(TBX.UI.DockType.Right);
@@ -71,6 +73,14 @@ class GameScene extends TBX.Scene2D {
 
     public GoBack(): void {
         TBX.Runner.Current.SwitchScene("Menu");
+    }
+
+    public InventorySelect(part: Part): void {
+        this._Dragged.ApplyData(part);
+        setTimeout(() => {
+            this.gameState.inventory.Remove(part);
+            this._Inventory.ApplyData(this.gameState.inventory.parts);
+        }, 100);
     }
 
     public MouseDown(Game: TBX.Game, Args: any): void {

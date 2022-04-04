@@ -10,6 +10,7 @@ class InventoryIcon extends TBX.UI.Panel {
     public part: Part;
     public icon: TBX.UI.Panel;
     public label: TBX.UI.Label;
+    public Click: (part: Part) => void;
 
     public get iconUrl(): string {
         return this.part.Type + "/" + this.part.Id;
@@ -28,6 +29,7 @@ class InventoryIcon extends TBX.UI.Panel {
         this.Style.Values.flexDirection = "column";
         this.icon = this.CreateIcon();
         this.label = this.CreateLabel();
+        this.Events.Click.push(this.OnClick.bind(this));
         this.Attach(this.icon);
         this.Attach(this.label);
     }
@@ -40,6 +42,12 @@ class InventoryIcon extends TBX.UI.Panel {
             this.icon.Style.Background.Image = 'url("' + Settings.ResourcesRoot + Settings.PartsRoot + this.iconUrl + '.png")';
         } else {
             this.Active = false;
+        }
+    }
+
+    public OnClick(): void {
+        if (this.part && this.Click) {
+            this.Click(this.part);
         }
     }
 

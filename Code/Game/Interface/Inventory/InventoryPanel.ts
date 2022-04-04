@@ -12,6 +12,7 @@ class InventoryPanel extends TBX.UI.Panel {
 
     public parts: Part[];
     public icons: InventoryIcon[];
+    public Click: (part: Part) => void;
 
     public constructor(dock: TBX.UI.DockType) {
         super();
@@ -37,6 +38,7 @@ class InventoryPanel extends TBX.UI.Panel {
         // Hotfix
         for (let i = 0; i < 100; i++) {
             const icon = new InventoryIcon();
+            icon.Click = this.OnClick.bind(this);
             this.icons.push(icon);
             this.Attach(icon);
         }
@@ -46,6 +48,12 @@ class InventoryPanel extends TBX.UI.Panel {
         this.parts = parts;
         this.RenderIcons();
         this.Update();
+    }
+
+    public OnClick(part: Part): void {
+        if (part && this.Click) {
+            this.Click(part);
+        }
     }
 
     private RenderIcons(): void {
