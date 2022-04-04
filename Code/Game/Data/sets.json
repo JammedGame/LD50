@@ -55,6 +55,13 @@
             "Status": "100",
             "Type": "Head",
             "PrimaryResource": "plutonium"
+        },
+        {
+            "Id": "head08",
+            "Name": "head08",
+            "Status": "100",
+            "Type": "Head",
+            "PrimaryResource": "platina"
         }
     ],
     "Torso": [
@@ -113,6 +120,13 @@
             "Status": "100",
             "Type": "Torso",
             "PrimaryResource": "plutonium"
+        },
+        {
+            "Id": "torso08",
+            "Name": "Torso08",
+            "Status": "100",
+            "Type": "Torso",
+            "PrimaryResource": "platina"
         }
     ],
     "Arm": [
@@ -171,6 +185,13 @@
             "Status": "100",
             "Type": "Arm",
             "PrimaryResource": "plutonium"
+        },
+        {
+            "Id": "arm08",
+            "Name": "LeftArm08",
+            "Status": "100",
+            "Type": "Arm",
+            "PrimaryResource": "platina"
         }
     ],
     "Leg": [
@@ -229,6 +250,13 @@
             "Status": "100",
             "Type": "Leg",
             "PrimaryResource": "plutonium"
+        },
+        {
+            "Id": "leg08",
+            "Name": "LeftLeg08",
+            "Status": "100",
+            "Type": "Leg",
+            "PrimaryResource": "platina"
         }
     ]
 }
