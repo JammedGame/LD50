@@ -24,13 +24,17 @@ class GameState
 		this.missions = new ActiveMissionsState();
 	}
 
-	public BuyPartFromShop(part: Part, slotType: SlotType)
+    public CanBuy(part: Part)
+    {
+        return this.resources.CanAfford(ResourceType.Iron, part.GetBuyPrice());
+    }
+
+	public BuyPartFromShop(part: Part)
 	{
-		if (this.resources.CanAfford(ResourceType.Iron, part.GetBuyPrice()) && part.IsAssignableToSlot(slotType))
+		if (this.resources.CanAfford(ResourceType.Iron, part.GetBuyPrice()))
 		{
 			this.shop.BuyPart(part);
 			this.resources.Spend(ResourceType.Iron, part.GetBuyPrice());
-			this.PutPartIntoRobot(slotType, part);
 		}
 	}
 

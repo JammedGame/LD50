@@ -54,6 +54,7 @@ class GameScene extends TBX.Scene2D {
         this.Attach(this._Inventory);
 
         this._Shop = new InventoryPanel(TBX.UI.DockType.Right);
+        this._Shop.Click = this.ShopSelect.bind(this);
         this.Attach(this._Shop);
 
         this._Resources = new ResourcePanel();
@@ -87,6 +88,17 @@ class GameScene extends TBX.Scene2D {
             this.gameState.inventory.Remove(part);
             this._Inventory.ApplyData(this.gameState.inventory.parts);
         }, 100);
+    }
+
+    public ShopSelect(part: Part): void {
+        if (this.gameState.CanBuy(part)) {
+            this._Dragged.ApplyData(part);
+            setTimeout(() => {
+                this.gameState.BuyPartFromShop(part);
+                this._Shop.ApplyData(this.gameState.shop.parts);
+                this._Resources.ApplyData(this.gameState.resources);
+            }, 100);
+        }
     }
 
     public MouseDown(Game: TBX.Game, Args: any): void {
