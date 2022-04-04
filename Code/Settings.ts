@@ -5,7 +5,7 @@ const Settings = {
     ForeColor: TBX.Color.Black,
     ForeColor2: TBX.Color.FromString("#708090"),
     BackColor: TBX.Color.FromString("#FBFBF8"),
-    ResourcesRoot: "/Resources/Textures/",
+    ResourcesRoot: "Resources/Textures/",
     ResourceIconsRoot: "UI/Resource/",
     PartsRoot: "Parts/"
 };

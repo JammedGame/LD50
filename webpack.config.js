@@ -12,7 +12,7 @@ module.exports = {
   output:
   {
     path: path.resolve(__dirname, "build"),
-    filename: "lD50.js",
+    filename: "build.js",
     publicPath: "/Resources/"
   },
   resolve:
