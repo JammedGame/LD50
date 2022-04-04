@@ -1,3 +1,4 @@
+import { Random } from "toybox-engine";
 import { Part, PartType } from "../RobotLogic/Part";
 import { ResourceType } from "../RobotLogic/ResourceType";
 import { SlotType } from "../RobotLogic/Robot";
@@ -33,7 +34,7 @@ class PartGen {
 
     public static generatePart(partType: PartType, primaryResource: ResourceType): Part {
         let partsForType: Part[] = parsePartSet()[partType].filter(element => element.PrimaryResource === primaryResource);
-        let partIndex: number = Math.floor(Math.random() * partsForType.length);
+        let partIndex: number = Random.Next(0, partsForType.length - 1);
         let newPart: Part = partsForType[partIndex];
 
         let resourceTypesPool = allResourceTypes.filter(x => x != primaryResource);

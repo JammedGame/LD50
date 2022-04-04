@@ -1,5 +1,5 @@
 import { Random } from "toybox-engine";
-import { Part } from "../RobotLogic/Part";
+import { Part, PartType } from "../RobotLogic/Part";
 import { ResourceType } from "../RobotLogic/ResourceType";
 import { Robot, SlotType } from "../RobotLogic/Robot";
 import { PartGen } from "./PartGen";
@@ -190,7 +190,17 @@ class InventoryState
 	public Add(part: Part): void
 	{
 		this.parts.push(part);
+		this.parts.sort((a, b) => PartIndex(a.Type) - PartIndex(b.Type));
 	}
+}
+
+function PartIndex(partType: PartType): number
+{
+	if (partType == PartType.Head) return 0;
+	if (partType == PartType.Torso) return 1;
+	if (partType == PartType.Arm) return 2;
+	if (partType == PartType.Leg) return 3;
+	return 999;
 }
 
 class ShopState
@@ -212,8 +222,7 @@ class ShopState
 		}
 
 		// replace item from shop with new draw
-		this.parts.splice(index, 1);
-		this.parts.push(PartGen.generatePart(part.Type, part.PrimaryResource));
+		this.parts.splice(index, 1, PartGen.generatePart(part.Type, part.PrimaryResource));
 		return true;
 	}
 }
