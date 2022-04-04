@@ -33,7 +33,7 @@ class Part
     public SecondaryResource: ResourceType;
     public TeritaryResource: ResourceType;
 
-    public constructor(Old?: Part, Type?: PartType)
+    public constructor(Old?: Partial<Part>, Type?: PartType)
     {
         if(Old)
         {

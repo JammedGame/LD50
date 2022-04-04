@@ -5,7 +5,7 @@ import { Robot, SlotType } from "../RobotLogic/Robot";
 import { PartGen } from "./PartGen";
 import { RobotGen } from "./RobotGen";
 
-export { GameState }
+export { GameState, ResourceStorage }
 
 class GameState
 {
@@ -43,12 +43,9 @@ class GameState
 	}
 
 
-	public SellPartFromInventory(part: Part)
+	public SellPart(part: Part)
 	{
-		if (this.inventory.Remove(part))
-		{
-			this.resources.Give(ResourceType.Iron, part.GetSellingPrice());
-		}
+		this.resources.Give(ResourceType.Iron, part.GetSellingPrice());
 	}
 
 	private PutPartIntoRobot(slotType: SlotType, newPart: Part)

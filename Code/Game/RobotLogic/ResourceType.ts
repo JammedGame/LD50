@@ -1,4 +1,4 @@
-export { ResourceType }
+export { ResourceType, ResourceTypeValues }
 
 enum ResourceType {
     Oil = "oil",
@@ -7,4 +7,14 @@ enum ResourceType {
     Plutonium = "plutonium",
     Gas = "gas",
     Iron = "iron"
+}
+
+function ResourceTypeValues(): string[] {
+    let Values = [];
+    for (let Value in ResourceType) {
+        if (isNaN(Number(Value))) {
+            Values.push(ResourceType[Value]);
+        }
+    }
+    return Values;
 }

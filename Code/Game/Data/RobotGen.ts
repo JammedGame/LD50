@@ -1,3 +1,4 @@
+import { Part, PartTypeValues } from "../RobotLogic/Part";
 import { Robot, SlotType, SlotTypeToPartType, SlotTypeValues } from "../RobotLogic/Robot";
 import { PartSet } from "./PartSet";
 
@@ -38,5 +39,5 @@ class RobotGen {
 }
 
 function parsePartSet(): PartSet {
-    return Object.assign(new PartSet, data)
+    return new PartSet(data);
 }

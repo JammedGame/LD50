@@ -10,6 +10,7 @@ import { RobotDraw } from "./RobotDraw/RobotDraw";
 import { InventoryPanel } from "./Interface/Inventory/InventoryPanel";
 import { DraggedPart } from "./RobotDraw/DraggedPart";
 import { Part } from "./RobotLogic/Part";
+import { ResourcePanel } from "./Interface/Resource/ResourcePanel";
 
 class GameScene extends TBX.Scene2D {
     public static Current: GameScene;
@@ -20,6 +21,7 @@ class GameScene extends TBX.Scene2D {
     private _BackButton: TBX.UI.Button;
     private _Inventory: InventoryPanel;
     private _Shop: InventoryPanel;
+    private _Resources: ResourcePanel;
 
     public constructor(Old?: GameScene) {
         super(Old);
@@ -54,6 +56,9 @@ class GameScene extends TBX.Scene2D {
         this._Shop = new InventoryPanel(TBX.UI.DockType.Right);
         this.Attach(this._Shop);
 
+        this._Resources = new ResourcePanel();
+        this.Attach(this._Resources);
+
         this._Dragged = new DraggedPart();
         this.Attach(this._Dragged);
 
@@ -69,6 +74,7 @@ class GameScene extends TBX.Scene2D {
         this._Robot.ApplyData(this.gameState.currentRobot);
         this._Inventory.ApplyData(this.gameState.inventory.parts);
         this._Shop.ApplyData(this.gameState.shop.parts);
+        this._Resources.ApplyData(this.gameState.resources);
     }
 
     public GoBack(): void {
@@ -84,7 +90,7 @@ class GameScene extends TBX.Scene2D {
     }
 
     public MouseDown(Game: TBX.Game, Args: any): void {
-        if (!this._Dragged.Active) {
+        if (!this._Dragged?.Active) {
             const SceneObject = TBX.Runner.Current.PickSceneObject(Args.UnscaledLocation);
             if (SceneObject && SceneObject instanceof SlotDraw) {
                 const PickedPart = SceneObject as unknown as SlotDraw;
@@ -98,7 +104,7 @@ class GameScene extends TBX.Scene2D {
 
     public MouseMove(event: any): void {
         let NewLocation = new TBX.Vertex(event.clientX, event.clientY, 1);
-        if (this._Dragged.Active) {
+        if (this._Dragged?.Active) {
             this._Dragged.SetPosition(this.TransformMouseCoordinates(NewLocation));
         } else {
             const SceneObject = TBX.Runner.Current.PickSceneObject(NewLocation);
@@ -123,14 +129,15 @@ class GameScene extends TBX.Scene2D {
 
     public MouseUp(event: any): void {
         let NewLocation = new TBX.Vertex(event.clientX, event.clientY, 1);
-        if (this._Dragged.Active) {
+        if (this._Dragged?.Active) {
             if (NewLocation.X < 200) {
                 this.gameState.inventory.Add(this._Dragged.part);
                 this._Dragged.ApplyData(undefined);
                 this._Inventory.ApplyData(this.gameState.inventory.parts);
             } else if (NewLocation.X > 1720) {
-                // Sell to shop
+                this.gameState.SellPart(this._Dragged.part);
                 this._Dragged.ApplyData(undefined);
+                this._Resources.ApplyData(this.gameState.resources);
             } else {
                 const SceneObject = TBX.Runner.Current.PickSceneObject(NewLocation);
                 if (SceneObject && SceneObject instanceof SlotDraw) {

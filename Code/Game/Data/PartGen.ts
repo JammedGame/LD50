@@ -39,5 +39,5 @@ class PartGen {
 }
 
 function parsePartSet(): PartSet {
-    return Object.assign(new PartSet, data)
+    return new PartSet(data);
 }
