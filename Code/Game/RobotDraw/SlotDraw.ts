@@ -4,6 +4,7 @@ import * as TBX from "toybox-engine";
 
 import { Part, PartType } from "../RobotLogic/Part";
 import { SlotType } from "../RobotLogic/Robot";
+import { PartDrawingUtil } from "./PartDrawingUtil";
 import { PartHoverDetails } from "./PartHoverDetails";
 
 const PICKABLE = "Pickable";
@@ -55,15 +56,7 @@ class SlotDraw extends TBX.Tile
     }
     public SetPositions(): void
     {
-        switch(this.slotType) {
-            case SlotType.Head: this.SetPartPosition(new TBX.Vertex(0,-260,0.2)); break;
-            case SlotType.Torso: this.SetPartPosition(new TBX.Vertex(0,0,0.1)); break;
-            case SlotType.LeftArm: this.SetPartPosition(new TBX.Vertex(-185,5,0)); break;
-            case SlotType.RightArm: this.SetPartPosition(new TBX.Vertex(185,5,0)); break;
-            case SlotType.LeftLeg: this.SetPartPosition(new TBX.Vertex(-95,205,0)); break;
-            case SlotType.RightLeg: this.SetPartPosition(new TBX.Vertex(95,205,0)); break;
-            default: this.SetPartPosition(new TBX.Vertex(0,0,0)); break;
-        }
+        this.SetPartPosition(PartDrawingUtil.GetPosition(this.slotType));
     }
     private SetPartPosition(Offset: TBX.Vertex): void
     {
@@ -72,15 +65,7 @@ class SlotDraw extends TBX.Tile
     }
     private SetDimmensions(): void
     {
-        switch(this.slotType) {
-            case SlotType.Head: this.Size = new TBX.Vertex(255, 255); break;
-            case SlotType.Torso: this.Size = new TBX.Vertex(310, 310); break;
-            case SlotType.LeftArm: this.Size = new TBX.Vertex(195, 310); break;
-            case SlotType.RightArm: this.Size = new TBX.Vertex(195, 310); break;
-            case SlotType.LeftLeg: this.Size = new TBX.Vertex(195, 235); break;
-            case SlotType.RightLeg: this.Size = new TBX.Vertex(195, 235); break;
-            default: this.Size = new TBX.Vertex(310, 310);
-        }
+        this.Size = PartDrawingUtil.GetSize(this.partType);
         if (this.slotType === SlotType.RightArm || this.slotType === SlotType.RightLeg)
         {
             this.FlipX = true;
