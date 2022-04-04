@@ -22,6 +22,12 @@ class ResourceEntry extends TBX.UI.Panel {
         this.Style.Values.flexDirection = "row";
         this.icon = this.CreateIcon(iconUrl);
         this.label = this.CreateLabel();
+        if (iconUrl == "iron") {
+            this.Style.Border.Radius = 4;
+            this.Style.Border.Width = 2;
+            this.Style.Values.borderLeftWidth = "0";
+            this.Style.Border.Color = Settings.ForeColor;
+        }
         this.Attach(this.icon);
         this.Attach(this.label);
     }
